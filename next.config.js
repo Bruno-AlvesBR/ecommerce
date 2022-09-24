@@ -1,7 +1,9 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   reactStrictMode: true,
-  swcMinify: true,
-}
-
-module.exports = nextConfig
+  compiler: {
+    emotion: true,
+  },
+  images: {
+    domains: ['iili.io', 'storage.googleapis.com'],
+  },
+};
