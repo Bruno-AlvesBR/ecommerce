@@ -8,10 +8,16 @@ export const Container = styled(AppBar)(({ theme }) => ({
   boxShadow: 'none',
   borderBottom: `1px solid ${theme?.palette?.common?.black}`,
   position: 'relative',
-  padding: 0
+  padding: 0,
+  display: 'flex',
+  flexDirection: 'column',
+
+  [theme?.breakpoints?.down('lg')]: {
+    padding: '0px 15px',
+  },
 }));
 
-export const Content = styled(Toolbar)(() => ({
+export const Content = styled(Toolbar)(({ theme }) => ({
   width: '100%',
   maxWidth: 1280,
   display: 'flex',

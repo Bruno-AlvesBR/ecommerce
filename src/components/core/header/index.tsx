@@ -4,6 +4,7 @@ import Chart from './Cart';
 import Search from './Search';
 
 import { Container, Content, RightContent } from './styles';
+import NavBar from './NavBar';
 
 const Header: React.FC = () => (
   <Container>
@@ -15,6 +16,7 @@ const Header: React.FC = () => (
         <Chart notifiesCount={3} />
       </RightContent>
     </Content>
+    <NavBar />
   </Container>
 );
 

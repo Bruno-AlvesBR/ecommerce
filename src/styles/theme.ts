@@ -22,8 +22,25 @@ const theme = createTheme({
       white: '#FFFFFF',
     },
     background: {
-      paper: '#BDBDBD',
-      default: '#F1F0F0'
+      paper: '#e61a4d',
+      default: '#F1F0F0',
+    },
+    action: {
+      hover: '#B0B0B0',
+    },
+  },
+  breakpoints: {
+    values: {
+      // extra-small
+      xs: 0,
+      // small
+      sm: 600,
+      // medium
+      md: 900,
+      // large
+      lg: 1280,
+      // extra-large
+      xl: 1536,
     },
   },
 });

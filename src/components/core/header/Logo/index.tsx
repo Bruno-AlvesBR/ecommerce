@@ -3,16 +3,9 @@ import Link from 'next/link';
 
 import { ButtonLogo } from './styles';
 
-interface ILogoProps {
-  width?: string | number;
-  height?: string | number;
-}
-
-const Logo: React.FC<ILogoProps> = ({ width, height }) => (
+const Logo: React.FC = () => (
   <Link href="/" passHref>
-    <ButtonLogo>
-      <IconLogo width={width} height={height} />
-    </ButtonLogo>
+    <ButtonLogo>Dunked</ButtonLogo>
   </Link>
 );
 
