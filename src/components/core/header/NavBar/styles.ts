@@ -35,6 +35,7 @@ export const Item = styled(Link)<IContentProps>(
     fontWeight: 600,
     background: isSelected && theme?.palette?.background?.paper,
     transition: '.3s all ease',
+    textTransform: 'uppercase',
 
     '&:hover': {
       background: theme?.palette?.background?.paper,

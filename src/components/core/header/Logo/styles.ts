@@ -8,5 +8,6 @@ export const ButtonLogo = styled(Link)(({ theme }) => ({
   fontWeight: 800,
   fontFamily: theme?.typography?.fontFamily,
   textDecoration: 'none',
-  width: 'fit-content'
+  width: 'fit-content',
+  textTransform: 'uppercase',
 }));
