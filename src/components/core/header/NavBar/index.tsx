@@ -11,8 +11,8 @@ const NavBar: React.FC = () => {
   return (
     <Container>
       {listNav?.map(item => (
-        <Link key={item?.id} href={`/${item?.id}`} passHref>
-          <Item isSelected={pathname === `/${item?.id}`}>
+        <Link key={item?.id} href={`/contents/${item?.id}`} passHref>
+          <Item isSelected={pathname === `/contents/${item?.id}`}>
             {item?.title}
           </Item>
         </Link>
