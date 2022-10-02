@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 export const Container = styled(Box)(() => ({
   marginRight: 16,
   width: '100%',
+  maxWidth: 500,
   display: 'flex',
   alignItems: 'center',
   height: '100%',

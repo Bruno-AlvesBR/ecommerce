@@ -11,6 +11,12 @@ export const Container = styled(Box)(() => ({
   maxWidth: 1280,
   margin: '0px auto',
   padding: 0,
+  overflowX: 'auto',
+  position: 'relative',
+
+  '&::-webkit-scrollbar': {
+    display: 'none',
+  },
 }));
 
 interface IContentProps {
