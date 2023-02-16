@@ -24,6 +24,8 @@ export const Content = styled(Toolbar)(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'space-between',
   margin: '0px auto',
+  position: 'relative',
+  gap: '2rem',
 
   '&.MuiToolbar-root': { padding: 0 },
 }));
@@ -33,4 +35,5 @@ export const RightContent = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'right',
+  gap: '1rem',
 }));

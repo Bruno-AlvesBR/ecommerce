@@ -15,15 +15,9 @@ export default class MyDocument extends Document<DocumentProps> {
       <Html lang="pt">
         <Head>
           <meta charSet="utf-8" />
-          <meta
-            name="description"
-            content="E-commerce..."
-          />
+          <meta name="description" content="E-commerce..." />
           <meta name="author" content="Bruno Alves" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap"
-            rel="stylesheet"
-          />
+
           <link
             rel="preconnect"
             href="https://fonts.googleapis.com"

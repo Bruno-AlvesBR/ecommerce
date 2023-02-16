@@ -4,9 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 export const Container = styled(Box)(() => ({
-  marginRight: 16,
-  width: '100%',
-  maxWidth: 500,
+  flex: 1,
   display: 'flex',
   alignItems: 'center',
   height: '100%',

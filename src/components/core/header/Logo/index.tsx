@@ -1,10 +1,9 @@
-import IconLogo from '@/assets/icons/logo';
-import Link from 'next/link';
+import { Link } from '@/components/ui/Link';
 
 import { ButtonLogo } from './styles';
 
 const Logo: React.FC = () => (
-  <Link href="/" passHref>
+  <Link href="/" passHref noDecoration>
     <ButtonLogo>Dunked</ButtonLogo>
   </Link>
 );

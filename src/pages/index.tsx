@@ -1,6 +1,12 @@
-import { NextPage } from 'next';
-import HomePresentation from 'presentations/home';
+import { GetStaticProps, NextPage } from 'next';
 
-const Home: NextPage = () => <HomePresentation />
+import HomePresentation from '@/presentation/home';
+
+const Home: NextPage = () => <HomePresentation />;
 
 export default Home;
+
+export const getStaticProps: GetStaticProps = async () => ({
+  props: {},
+  revalidate: 600,
+});

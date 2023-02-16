@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@/components/ui/Link';
 import Avatar from '@mui/material/Avatar';
 
 import { Container } from './styles';
@@ -8,7 +8,7 @@ interface IProfileProps {
 }
 
 const Profile: React.FC<IProfileProps> = ({ image }) => (
-  <Link href="/profile" passHref>
+  <Link href="/perfil" passHref noDecoration>
     <Container>
       <Avatar variant="square" src={image} />
     </Container>

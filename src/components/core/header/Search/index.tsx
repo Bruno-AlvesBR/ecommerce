@@ -1,23 +1,23 @@
-import Link from 'next/link';
+import { Link } from '@/components/ui/Link';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
-
-import { Input, ButtonSearch, Container } from './styles';
 import { useRef, useState } from 'react';
 
-interface ISearchProps {
-  searchTerm?: string;
-}
+import { Input, ButtonSearch, Container } from './styles';
+import { Box } from '@mui/material';
+import { useRouter } from 'next/router';
 
-const Search: React.FC<ISearchProps> = ({ searchTerm = '' }) => {
+const Search: React.FC = () => {
   const buttonRef = useRef(null);
+  const { push } = useRouter();
 
   const [isOpenSearch, setIsOpenSearch] = useState(true);
+  const [term, setTerm] = useState('');
 
-  const handlePressKey = e => {
-    if (e.key !== 'Enter') return;
+  const handlePressKey = (event: any) => {
+    if (event?.key !== 'Enter') return;
 
-    buttonRef.current.click();
+    if (term) push(`/busca?q=${term}`);
   };
 
   return (
@@ -26,26 +26,15 @@ const Search: React.FC<ISearchProps> = ({ searchTerm = '' }) => {
         placeholder="Pesquise aqui..."
         isOpenSearch={isOpenSearch}
         onKeyDown={handlePressKey}
+        onChange={event => setTerm(event.target.value)}
       />
-      {searchTerm?.length <= 0 ? (
-        <ButtonSearch
-          ref={buttonRef}
-          isOpenSearch={isOpenSearch}
-          onClick={() => setIsOpenSearch(!isOpenSearch)}
-        >
-          {isOpenSearch ? <SearchIcon /> : <CloseIcon />}
-        </ButtonSearch>
-      ) : (
-        <Link
-          ref={buttonRef}
-          href={`/search?q=${searchTerm}`}
-          passHref
-        >
-          <ButtonSearch isOpenSearch={isOpenSearch}>
-            <SearchIcon />
-          </ButtonSearch>
-        </Link>
-      )}
+      <ButtonSearch
+        ref={buttonRef}
+        isOpenSearch={isOpenSearch}
+        onClick={() => setIsOpenSearch(!isOpenSearch)}
+      >
+        {isOpenSearch ? <SearchIcon /> : <CloseIcon />}
+      </ButtonSearch>
     </Container>
   );
 };

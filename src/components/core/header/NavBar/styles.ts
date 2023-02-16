@@ -1,6 +1,6 @@
 import { styled, Theme } from '@mui/material';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+import { Link } from '@/components/ui/Link';
 
 export const Container = styled(Box)(() => ({
   display: 'flex',
@@ -31,7 +31,7 @@ export const Item = styled(Link)<IContentProps>(
     color: !isSelected
       ? theme?.palette?.primary?.main
       : theme?.palette?.common?.white,
-    fontSize: 16,
+    fontSize: '1rem',
     fontWeight: 600,
     background: isSelected && theme?.palette?.background?.paper,
     transition: '.3s all ease',
