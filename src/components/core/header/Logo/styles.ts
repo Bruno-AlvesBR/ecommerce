@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import Link from '@mui/material/Link';
+import { Link } from '@/components/ui/Link';
 
 export const ButtonLogo = styled(Link)(({ theme }) => ({
   minWidth: 0,
@@ -10,4 +10,5 @@ export const ButtonLogo = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
   width: 'fit-content',
   textTransform: 'uppercase',
+  color: theme?.palette?.primary?.main,
 }));
