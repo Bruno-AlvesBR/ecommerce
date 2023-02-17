@@ -9,10 +9,8 @@ const CardSkeleton: React.FC = (theme: Theme) => (
     sx={{
       background: theme?.palette?.common?.white,
       border: `0.5px solid #000`,
-      '&:not(:last-of-type)': { margin: '0px 26px 0px 0px' },
     }}
     minWidth={300}
-    maxWidth={300}
     minHeight={320}
     maxHeight={320}
     borderRadius="5px"

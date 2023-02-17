@@ -21,8 +21,9 @@ export const Input = styled(TextField)<IContentProps>(
   ({ isOpenSearch, theme }) => ({
     alignItems: 'left',
     justifyContent: 'left',
-    transition: '.1s all ease',
+    transition: '.15s all ease',
     width: isOpenSearch ? 0 : '100%',
+    height: '100%',
 
     '& .MuiInputBase-root': {
       borderRadius: !isOpenSearch && '5px 0px 0px 5px',
@@ -31,7 +32,7 @@ export const Input = styled(TextField)<IContentProps>(
     '& input': {
       transition: '.1s all ease',
       width: isOpenSearch ? 0 : '100%',
-      padding: isOpenSearch ? 0 : '8.5px 12px',
+      padding: isOpenSearch ? '8.5px 0' : '8.5px 12px',
     },
   }),
 );

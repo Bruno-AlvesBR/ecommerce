@@ -1,9 +1,8 @@
-import Link from 'next/link';
-
 import { IBestSellersProps } from '@/domain/home/entities/IBestSellers';
 import DefaultCard from '@/components/core/Card';
 
 import { Container, Contents, RedirectButton, Title } from './styles';
+import { Carrousel } from '@/components/core/Carrousel';
 
 interface IBestSellersComponentProps {
   bestSellers: IBestSellersProps[];
@@ -13,16 +12,15 @@ const BestSellers: React.FC<IBestSellersComponentProps> = ({
   bestSellers,
 }) => (
   <Container>
-    <Title variant="h1">MAIS VENDIDOS</Title>
-
-    <Contents>
+    <Carrousel contentSize={640}>
       {bestSellers?.map(content => (
         <DefaultCard key={content?.id} {...content} />
       ))}
-    </Contents>
-    <Link href="/categoria/best-sellers" passHref>
-      <RedirectButton>VER TODOS</RedirectButton>
-    </Link>
+    </Carrousel>
+
+    <RedirectButton href="/categoria/best-sellers">
+      VER TODOS
+    </RedirectButton>
   </Container>
 );
 
