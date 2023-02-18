@@ -36,7 +36,7 @@ export const Item = styled(Link)<IContentProps>(
     background: isSelected && theme?.palette?.background?.paper,
     transition: '.3s all ease',
     textTransform: 'uppercase',
-    borderRadius: '6px 6px 0 0',
+    borderRadius: '4px 4px 0 0',
 
     '&:hover': {
       background: theme?.palette?.background?.paper,

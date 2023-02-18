@@ -11,38 +11,42 @@ SwiperCore.use([Navigation, Pagination]);
 
 import { IBanner } from '@/domain/banner/entities';
 
+import { Container } from './styles';
+
 interface IHomeBanner {
   banners: Array<IBanner>;
 }
 
 const HomeBanner: React.FC<IHomeBanner> = ({ banners }) => (
-  <Swiper
-    slidesPerView={1}
-    centeredSlides
-    autoplay={{
-      delay: 5500,
-      disableOnInteraction: false,
-      stopOnLastSlide: false,
-      pauseOnMouseEnter: true,
-    }}
-    pagination={{
-      clickable: true,
-    }}
-    navigation={false}
-    loop
-  >
-    {banners?.map(banner => (
-      <SwiperSlide key={banner?.slug}>
-        <Image
-          src={banner?.imageUrl}
-          alt={banner?.altText}
-          width={1440}
-          height={450}
-          objectFit="cover"
-        />
-      </SwiperSlide>
-    ))}
-  </Swiper>
+  <Container>
+    <Swiper
+      slidesPerView={1}
+      centeredSlides
+      autoplay={{
+        delay: 5500,
+        disableOnInteraction: false,
+        stopOnLastSlide: false,
+        pauseOnMouseEnter: true,
+      }}
+      pagination={{
+        clickable: true,
+      }}
+      navigation={false}
+      loop
+    >
+      {banners?.map(banner => (
+        <SwiperSlide key={banner?.slug}>
+          <Image
+            src={banner?.imageUrl}
+            alt={banner?.altText}
+            width={2000}
+            height={800}
+            objectFit="contain"
+          />
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  </Container>
 );
 
 const Banner = memo(HomeBanner);

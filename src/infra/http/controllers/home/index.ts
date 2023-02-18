@@ -1,8 +1,13 @@
+import { IProductData } from '@/domain/api/product/data';
 import { IBanner } from '@/domain/banner/entities';
-import { IBestSellersProps } from '@/domain/home/entities/IBestSellers';
+import { handleFormatProduct } from '@/utils/format/product';
 
 class HomeController {
-  constructor() {}
+  private releaseProvider: IProductData;
+
+  constructor(releaseProvider: IProductData) {
+    this.releaseProvider = releaseProvider;
+  }
 
   async index() {
     const banners: Array<IBanner> = [
@@ -14,18 +19,13 @@ class HomeController {
       },
     ];
 
-    const bestSellers: Array<IBestSellersProps> = [
-      { id: 'first', title: 'first', slug: 'first' },
-      { id: 'second', title: 'second', slug: 'second' },
-      { id: 'third', title: 'third', slug: 'third' },
-      { id: 'for', title: 'for', slug: 'for' },
-      { id: 'first', title: 'first', slug: 'first' },
-      { id: 'second', title: 'second', slug: 'second' },
-      { id: 'third', title: 'third', slug: 'third' },
-      { id: 'for', title: 'for', slug: 'for' },
-    ];
+    const releases = await this.releaseProvider.findAll();
 
-    return { banners, bestSellers };
+    const formatedReleases = releases?.map(release =>
+      handleFormatProduct(release),
+    );
+
+    return { banners, releases: formatedReleases };
   }
 }
 

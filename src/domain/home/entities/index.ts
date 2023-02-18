@@ -1,7 +1,7 @@
 import { IBanner } from '@/domain/banner/entities';
-import { IBestSellersProps } from './IBestSellers';
+import { IProduct } from '@/domain/api/product/entities';
 
 export interface IHome {
   banners?: Array<IBanner>;
-  bestSellers?: Array<IBestSellersProps>;
+  releases?: Array<IProduct>;
 }

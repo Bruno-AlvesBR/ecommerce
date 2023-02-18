@@ -1,33 +1,16 @@
 import { Banner } from '@/components/pages/home/Banner';
-import BestSellers from '@/components/pages/home/BestSellers';
+import BestSellers from '@/components/pages/home/Releases';
 import { MaxContainer } from '@/components/ui/Container';
 import { IHome } from '@/domain/home/entities';
+import { Content } from './styles';
 
-const HomePresentation: React.FC<IHome> = ({
-  banners,
-  bestSellers,
-}) => (
+const HomePresentation: React.FC<IHome> = ({ banners, releases }) => (
   <MaxContainer>
-    <div
-      style={{
-        position: 'absolute',
-        zIndex: -1,
-        top: 88.8,
-      }}
-    >
-      {banners && <Banner banners={banners} />}
-    </div>
+    {banners && <Banner banners={banners} />}
 
-    <div
-      style={{
-        width: '100%',
-        position: 'relative',
-        zIndex: 1,
-        marginTop: 160,
-      }}
-    >
-      {bestSellers && <BestSellers bestSellers={bestSellers} />}
-    </div>
+    <Content>
+      {releases && <BestSellers bestSellers={releases} />}
+    </Content>
   </MaxContainer>
 );
 

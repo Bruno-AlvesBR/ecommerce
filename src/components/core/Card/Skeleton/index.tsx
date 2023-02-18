@@ -11,9 +11,10 @@ const CardSkeleton: React.FC = (theme: Theme) => (
       border: `0.5px solid #000`,
     }}
     minWidth={300}
-    minHeight={320}
-    maxHeight={320}
+    minHeight={360}
+    maxHeight={360}
     borderRadius="5px"
+    justifyContent="space-between"
     overflow="hidden"
   >
     <Skeleton

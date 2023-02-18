@@ -4,20 +4,18 @@ import Box from '@mui/material/Box';
 
 import { Link } from '@/components/ui/Link';
 
-export const Container = styled(Box)(({ theme }) => ({
-  background: theme?.palette?.common?.white,
+export const Container = styled(Box)(() => ({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
   gap: '2rem',
   zIndex: 1,
-  padding: '40px 0',
-  borderRadius: 8,
+  position: 'relative',
+  height: 'fit-content',
 }));
 
 export const Title = styled(Typography)(({ theme }) => ({
-  fontSize: 20,
+  fontSize: '1.5rem',
   fontWeight: 400,
   lineHeight: '26px',
   color: theme?.palette?.primary?.dark,
@@ -38,6 +36,8 @@ export const RedirectButton = styled(Link)(({ theme }) => ({
   textDecorationColor: theme?.palette?.primary?.dark,
   textAlign: 'center',
   transition: '.15s all ease',
+  width: 'fit-content',
+  margin: '0 auto',
 
   '&:hover': {
     color: theme?.palette?.background?.paper,

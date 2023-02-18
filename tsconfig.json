@@ -27,6 +27,7 @@
       "@/utils/*": ["utils/*"],
       "@/presentation/*": ["presentation/*"],
       "@/infra/*": ["infra/*"],
+      "@/providers/*": ["providers/*"],
       "@/domain/*": ["domain/*"]
     }
   },
