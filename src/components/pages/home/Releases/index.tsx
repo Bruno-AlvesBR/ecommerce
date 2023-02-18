@@ -1,9 +1,9 @@
-import { IBestSellersProps } from '@/domain/api/product/entities';
+import { IProduct } from '@/domain/api/product/entities';
 import { Card } from '@/components/core/Card';
 import Section from '@/components/core/Section';
 
 interface IBestSellersComponentProps {
-  bestSellers: IBestSellersProps[];
+  bestSellers: IProduct[];
 }
 
 const BestSellers: React.FC<IBestSellersComponentProps> = ({
