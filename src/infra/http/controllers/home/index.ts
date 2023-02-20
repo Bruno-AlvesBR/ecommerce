@@ -21,11 +21,11 @@ class HomeController {
 
     const releases = await this.releaseProvider.findAll();
 
-    const formatedReleases = releases?.map(release =>
+    const formattedReleases = releases?.map(release =>
       handleFormatProduct(release),
     );
 
-    return { banners, releases: formatedReleases };
+    return { banners, releases: formattedReleases };
   }
 }
 

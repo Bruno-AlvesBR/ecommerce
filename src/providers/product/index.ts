@@ -6,7 +6,7 @@ class ProductProvider extends BaseApi implements IProductData {
   async findAll(): Promise<Array<IProductApi>> {
     try {
       const { data } = await this.api.get<Array<IProductApi>>(
-        '/product/foods',
+        '/product',
       );
 
       return data;

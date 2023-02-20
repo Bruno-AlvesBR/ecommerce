@@ -13,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
     max-width: 100vw;
     position: relative;
     font-size: 92.5%;
-    background: #fff;
+    background: #aaaaaa15;
     overflow-x: hidden;
   }
 

@@ -5,10 +5,11 @@ export interface IProductApi {
   description?: string;
   category?: string[];
   price?: {
-    priceNumber?: number;
+    priceNumber?: string;
+    newPriceDiscount?: string;
     installment?: {
       monthInstallment?: number;
-      pricePerMonth?: number;
+      pricePerMonth?: string;
     };
   };
   brand?: string;
@@ -17,6 +18,8 @@ export interface IProductApi {
   stock?: number;
   manufacture?: string;
   slug?: string;
+  isPromotion?: boolean;
+  discountPercentage?: number;
   image?: {
     mobileSrc?: string;
     desktopSrc?: string;
@@ -35,7 +38,9 @@ export interface IProduct {
     name: string;
     slug: string;
   };
-  price: number;
+  price: string;
+  newPriceDiscount?: string;
+  pricePerMonth?: string;
   isPromotion?: boolean;
   discountPercentage?: number;
   installment?: number;

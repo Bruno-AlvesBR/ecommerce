@@ -17,61 +17,35 @@ const handleFormatPrice = ({
   installment,
   discountPercentage,
 }: IHandleFormatPrice): IHandleFormatPriceResult => {
-  let formattedPrice: string = String(price);
-  const revertPriceFormat = Number(formattedPrice?.replace(',', '.'));
-
-  const convertPrice = (priceParam: number) =>
-    String(priceParam).replace('.', ',');
-
-  const verifyIsDecimalPrice = (priceParam: string) =>
-    priceParam?.includes('.') || priceParam?.includes(',');
-
-  if (!verifyIsDecimalPrice(formattedPrice))
-    formattedPrice = `${price},00`;
+  const formattedPrice = (param: number) =>
+    Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(param);
 
   const countDiscount = (price * discountPercentage) / 100;
 
   const formatFinalDiscount = (): string => {
-    const divisionResult = revertPriceFormat - countDiscount;
-    const divisionFormatted = String(divisionResult).replace('.', '');
+    const divisionResult = price - countDiscount;
+    const divisionFormatted = formattedPrice(divisionResult);
 
-    const formatBiggestResult =
-      `${divisionFormatted[0]}${divisionFormatted[1]}` +
-      `,${divisionFormatted[3] || 0}${divisionFormatted[4] || 0}`;
-
-    return formatBiggestResult.trim();
+    return divisionFormatted;
   };
 
-  let countInstallment = revertPriceFormat / installment;
+  let countInstallment = price / installment;
 
-  const formatCountInstallment = (
-    installmentPrice: number,
-  ): string => {
-    const installmentFormatted = convertPrice(installmentPrice);
-    const formatBiggestResult =
-      `${installmentFormatted[0]}${installmentFormatted[1]}` +
-      `,${installmentFormatted[3] || 0}${
-        installmentFormatted[4] || 0
-      }`;
-
-    return !verifyIsDecimalPrice(String(installmentPrice))
-      ? `${installmentPrice},00`
-      : formatBiggestResult.trim();
-  };
   if (isPromotion) {
-    countInstallment =
-      (revertPriceFormat - countDiscount) / installment;
+    countInstallment = (price - countDiscount) / installment;
 
     return {
-      price: formattedPrice,
+      price: formattedPrice(price),
       newPriceDiscount: formatFinalDiscount(),
-      priceInstallment: formatCountInstallment(countInstallment),
+      priceInstallment: formattedPrice(countInstallment),
     };
   } else {
     return {
-      price: formattedPrice,
-      newPriceDiscount: '',
-      priceInstallment: formatCountInstallment(countInstallment),
+      price: formattedPrice(price),
+      priceInstallment: formattedPrice(countInstallment),
     };
   }
 };

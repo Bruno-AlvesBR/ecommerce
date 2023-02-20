@@ -6,7 +6,9 @@ const handleFormatProduct = (product: IProductApi): IProduct => ({
   description: product?.description || '',
   brand: product?.brand || '',
   manufacturer: product?.manufacture || '',
-  price: product?.price?.priceNumber,
+  price: product?.price?.priceNumber || '',
+  newPriceDiscount: product?.price?.newPriceDiscount || '',
+  pricePerMonth: product?.price?.installment?.pricePerMonth || '',
   slug: product?.slug || '',
   category: {
     name: product?.category ? product?.category[0] : '',
@@ -19,9 +21,9 @@ const handleFormatProduct = (product: IProductApi): IProduct => ({
     { url: product?.image?.mobileSrc || '' },
   ],
   installment: product?.price?.installment?.monthInstallment || 1,
-  isPromotion: true,
+  isPromotion: product?.isPromotion,
   stockQuantity: product?.stock || 0,
-  discountPercentage: 40,
+  discountPercentage: product?.discountPercentage,
 });
 
 export { handleFormatProduct };
