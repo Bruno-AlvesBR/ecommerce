@@ -47,4 +47,5 @@ export interface IProduct {
   stockQuantity: number;
   manufacturer: string;
   brand: string;
+  rating: number;
 }

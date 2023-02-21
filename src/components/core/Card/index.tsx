@@ -4,8 +4,8 @@ import ReactImageMagnify from 'react-image-magnify';
 
 import { Link } from '@/components/ui/Link';
 import { IProduct } from '@/domain/api/product/entities';
-import { handleFormatPrice } from '@/utils/format/price';
 import CardSkeleton from './Skeleton';
+import { PromotionFlag } from '../PromotionFlag';
 
 import {
   Container,
@@ -28,6 +28,7 @@ const DefaultCard: React.FC<IProduct> = props => {
     installment,
     newPriceDiscount,
     pricePerMonth,
+    discountPercentage,
   } = props;
 
   const [mainImage, setMainImage] = useState(imgs[0]?.url);
@@ -55,6 +56,10 @@ const DefaultCard: React.FC<IProduct> = props => {
 
   return props ? (
     <Container>
+      {discountPercentage && (
+        <PromotionFlag discountPercentage={discountPercentage} />
+      )}
+
       <Content>
         {imgs && <ContentImage>{treatedImage}</ContentImage>}
 

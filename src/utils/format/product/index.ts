@@ -12,7 +12,7 @@ const handleFormatProduct = (product: IProductApi): IProduct => ({
   slug: product?.slug || '',
   category: {
     name: product?.category ? product?.category[0] : '',
-    slug: 'tenis',
+    slug: product?.category ? product?.category[0] : '',
   },
   imgs: [
     { url: product?.image?.desktopSrc || '' },
@@ -23,7 +23,8 @@ const handleFormatProduct = (product: IProductApi): IProduct => ({
   installment: product?.price?.installment?.monthInstallment || 1,
   isPromotion: product?.isPromotion,
   stockQuantity: product?.stock || 0,
-  discountPercentage: product?.discountPercentage,
+  discountPercentage: product?.discountPercentage || null,
+  rating: product?.rating || 0,
 });
 
 export { handleFormatProduct };

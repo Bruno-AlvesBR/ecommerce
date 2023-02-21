@@ -20,6 +20,7 @@ export const Container = styled(Box)(({ theme }) => ({
   flexDirection: 'column',
   padding: '8px 32px 32px 32px',
   justifyContent: 'space-between',
+  position: 'relative',
 }));
 
 export const Title = styled(Typography)(({ theme }) => ({

@@ -14,6 +14,18 @@ class ProductProvider extends BaseApi implements IProductData {
       return [];
     }
   }
+
+  async findBySlug(slug: string): Promise<IProductApi> {
+    try {
+      const { data } = await this.api.get<IProductApi>(
+        `/product/${slug}`,
+      );
+
+      return data;
+    } catch {
+      return {};
+    }
+  }
 }
 
 export { ProductProvider };
