@@ -3,7 +3,7 @@ import { GetStaticProps, NextPage } from 'next';
 import HomePresentation from '@/presentation/home';
 import { HomeController } from '@/infra/http/controllers/home';
 import { IHome } from '@/domain/home/entities';
-import { ProductProvider } from '@/providers/product/index';
+import { ProductProvider } from '@/providers/product';
 
 const Home: NextPage<IHome> = props => (
   <HomePresentation {...props} />
@@ -25,6 +25,7 @@ export const getStaticProps: GetStaticProps = async () => {
       props: {
         banners: [],
         releases: [],
+        promotions: [],
       },
       revalidate: 60,
     };

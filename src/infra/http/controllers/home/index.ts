@@ -10,22 +10,42 @@ class HomeController {
   }
 
   async index() {
-    const banners: Array<IBanner> = [
-      {
-        imageUrl: 'https://iili.io/HGCBAZX.webp',
-        slug: '',
-        alternativeLink: '',
-        altText: '',
-      },
-    ];
+    try {
+      const banners: Array<IBanner> = [
+        {
+          imageUrl: 'https://iili.io/HGCBAZX.webp',
+          slug: '',
+          alternativeLink: '',
+          altText: '',
+        },
+      ];
 
-    const releases = await this.releaseProvider.findAll();
+      const releases = await this.releaseProvider.findAllReleases();
+      const promotions =
+        await this.releaseProvider.findAllPromotions();
 
-    const formattedReleases = releases?.map(release =>
-      handleFormatProduct(release),
-    );
+      const formattedReleases = releases?.map(release =>
+        handleFormatProduct(release),
+      );
 
-    return { banners, releases: formattedReleases };
+      const formattedPromotions = promotions?.map(promotion =>
+        handleFormatProduct(promotion),
+      );
+
+      return {
+        banners,
+        releases: formattedReleases,
+        promotions: formattedPromotions,
+      };
+    } catch (error) {
+      console.error('error requesting/formatting data', error);
+
+      return {
+        banners: [],
+        releases: [],
+        promotions: [],
+      };
+    }
   }
 }
 

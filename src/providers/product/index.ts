@@ -26,6 +26,40 @@ class ProductProvider extends BaseApi implements IProductData {
       return {};
     }
   }
+
+  async findAllByCategory(
+    category: string,
+  ): Promise<Array<IProductApi>> {
+    try {
+      const { data } = await this.api.get(
+        `/product/category/${category}`,
+      );
+
+      return data;
+    } catch {
+      return [];
+    }
+  }
+
+  async findAllReleases(): Promise<Array<IProductApi>> {
+    try {
+      const { data } = await this.api.get('/product/releases');
+
+      return data;
+    } catch {
+      return [];
+    }
+  }
+
+  async findAllPromotions(): Promise<Array<IProductApi>> {
+    try {
+      const { data } = await this.api.get('/product/promotions');
+
+      return data;
+    } catch {
+      return [];
+    }
+  }
 }
 
 export { ProductProvider };

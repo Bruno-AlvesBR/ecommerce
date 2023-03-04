@@ -12,7 +12,9 @@ const handleFormatProduct = (product: IProductApi): IProduct => ({
   slug: product?.slug || '',
   category: {
     name: product?.category ? product?.category[0] : '',
-    slug: product?.category ? product?.category[0] : '',
+    slug: product?.category
+      ? product?.category[0]?.toLocaleLowerCase()
+      : '',
   },
   imgs: [
     { url: product?.image?.desktopSrc || '' },
