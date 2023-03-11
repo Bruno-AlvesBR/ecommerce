@@ -11,11 +11,13 @@ import {
 } from './styles';
 
 interface IIMageStructure {
-  images: Array<{ url?: string }>;
+  images: Array<string>;
 }
 
 const ImagesStructure: React.FC<IIMageStructure> = ({ images }) => {
-  const [mainUrl, setMainUrl] = useState(images && images[0]?.url);
+  const [mainUrl, setMainUrl] = useState(
+    images?.length > 0 && images[0],
+  );
 
   const treatedImage = useMemo(
     (): JSX.Element => (
@@ -43,23 +45,21 @@ const ImagesStructure: React.FC<IIMageStructure> = ({ images }) => {
       <ContentMainImage>{treatedImage}</ContentMainImage>
 
       <Carrousel contentSize={100}>
-        {images
-          ?.slice(1, images?.length)
-          ?.map((image, index: number) => (
-            <ContentAltImage
-              key={index}
-              isSelected={mainUrl === image?.url}
-              onClick={() => setMainUrl(image?.url)}
-            >
-              <Image
-                key={image?.url}
-                src={image?.url}
-                alt=""
-                width={100}
-                height={100}
-              />
-            </ContentAltImage>
-          ))}
+        {images?.map((image, index: number) => (
+          <ContentAltImage
+            key={index}
+            isSelected={mainUrl === image}
+            onClick={() => setMainUrl(image)}
+          >
+            <Image
+              key={image}
+              src={image}
+              alt=""
+              width={100}
+              height={100}
+            />
+          </ContentAltImage>
+        ))}
       </Carrousel>
     </Container>
   );

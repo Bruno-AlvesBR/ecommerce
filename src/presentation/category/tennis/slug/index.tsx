@@ -13,7 +13,7 @@ const TennisPresentation: React.FC<ITennisPresentation> = ({
 }) => (
   <Container style={{ padding: '2rem' }}>
     <Content>
-      <ImagesStructure images={tennis?.imgs} />
+      <ImagesStructure images={tennis?.images} />
 
       <MainInfos {...tennis} />
     </Content>

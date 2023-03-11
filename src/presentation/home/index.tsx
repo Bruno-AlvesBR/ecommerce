@@ -11,12 +11,14 @@ const HomePresentation: React.FC<IHome> = ({
   promotions,
 }) => (
   <MaxContainer>
-    {banners && <Banner banners={banners} />}
+    {banners?.length > 0 && <Banner banners={banners} />}
 
     <Content>
-      {releases && <BestSellers bestSellers={releases} />}
+      {releases?.length > 0 && <BestSellers bestSellers={releases} />}
 
-      {promotions && <Promotions promotions={promotions} />}
+      {promotions?.length > 0 && (
+        <Promotions promotions={promotions} />
+      )}
     </Content>
   </MaxContainer>
 );

@@ -1,6 +1,7 @@
 import { IProduct, IProductApi } from '@/domain/api/product/entities';
 
 const handleFormatProduct = (product: IProductApi): IProduct => ({
+  ...product,
   id: product?.id || '',
   title: product?.title || '',
   description: product?.description || '',
@@ -16,12 +17,6 @@ const handleFormatProduct = (product: IProductApi): IProduct => ({
       ? product?.category[0]?.toLocaleLowerCase()
       : '',
   },
-  imgs: [
-    { url: product?.image?.desktopSrc || '' },
-    { url: product?.image?.mobileSrc || '' },
-    { url: product?.image?.desktopSrc || '' },
-    { url: product?.image?.mobileSrc || '' },
-  ],
   installment: product?.price?.installment?.monthInstallment || 1,
   isPromotion: product?.isPromotion,
   stockQuantity: product?.stock || 0,

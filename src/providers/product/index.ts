@@ -23,7 +23,7 @@ class ProductProvider extends BaseApi implements IProductData {
 
       return data;
     } catch {
-      return {};
+      return {} as IProductApi;
     }
   }
 

@@ -24,14 +24,16 @@ const DefaultCard: React.FC<IProduct> = props => {
     title,
     slug,
     price,
-    imgs,
+    images,
     installment,
     newPriceDiscount,
     pricePerMonth,
     discountPercentage,
   } = props;
 
-  const [mainImage, setMainImage] = useState(imgs[0]?.url);
+  const [mainImage, setMainImage] = useState(
+    images?.length > 0 && images[0],
+  );
 
   const treatedImage = useMemo(
     (): JSX.Element => (
@@ -59,9 +61,10 @@ const DefaultCard: React.FC<IProduct> = props => {
       {discountPercentage && (
         <PromotionFlag discountPercentage={discountPercentage} />
       )}
-
       <Content>
-        {imgs && <ContentImage>{treatedImage}</ContentImage>}
+        {images?.length > 0 && (
+          <ContentImage>{treatedImage}</ContentImage>
+        )}
 
         <Link
           href={`/categoria/${category?.slug}/${slug}`}
@@ -97,13 +100,13 @@ const DefaultCard: React.FC<IProduct> = props => {
         </ContentPrice>
       </Content>
 
-      {imgs && (
+      {images?.length > 0 && (
         <ContentAlternativeImages>
-          {imgs?.slice(1, 4)?.map((image, index: number) => (
+          {images?.map((image, index: number) => (
             <AltImage key={index}>
               <Image
-                onClick={() => setMainImage(image?.url)}
-                src={image?.url}
+                onClick={() => setMainImage(image)}
+                src={image}
                 alt=""
                 height={60}
                 width={60}

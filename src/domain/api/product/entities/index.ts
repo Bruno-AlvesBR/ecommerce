@@ -20,10 +20,7 @@ export interface IProductApi {
   slug?: string;
   isPromotion?: boolean;
   discountPercentage?: number;
-  image?: {
-    mobileSrc?: string;
-    desktopSrc?: string;
-  };
+  images: Array<string>;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -32,7 +29,7 @@ export interface IProduct {
   id: string;
   title: string;
   description: string;
-  imgs?: { url?: string }[];
+  images: Array<string>;
   slug: string;
   category?: {
     name: string;
