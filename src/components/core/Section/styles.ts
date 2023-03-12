@@ -43,4 +43,6 @@ export const RedirectButton = styled(Link)(({ theme }) => ({
     color: theme?.palette?.background?.paper,
     textDecorationColor: theme?.palette?.background?.paper,
   },
+
+  [theme?.breakpoints?.down('sm')]: { fontSize: '1rem' },
 }));

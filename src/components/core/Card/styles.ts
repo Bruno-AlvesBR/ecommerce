@@ -9,7 +9,7 @@ interface IPrice {
 }
 
 export const Container = styled(Box)(({ theme }) => ({
-  minWidth: 300,
+  width: 300,
   maxWidth: 300,
   minHeight: 360,
   maxHeight: 360,
@@ -41,7 +41,7 @@ export const ContentPrice = styled(Box)(() => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
+    gap: '0.5rem',
   },
 }));
 
@@ -58,9 +58,9 @@ export const Content = styled(Box)(() => ({
   display: 'flex',
   flexDirection: 'column',
   width: 'fit-content',
-  gap: 8,
   justifyContent: 'center',
   alignItems: 'center',
+  gap: '0.5rem',
 }));
 
 export const ContentImage = styled(Box)(() => ({}));
@@ -77,4 +77,5 @@ export const AltImage = styled(Box)(({ theme }) => ({
   borderRadius: 5,
   maxWidth: 60,
   maxHeight: 60,
+  cursor: 'pointer',
 }));

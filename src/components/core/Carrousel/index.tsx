@@ -4,7 +4,12 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { PropsWithChildren, useRef } from 'react';
 
 import theme from '@/styles/theme';
-import { Button, Container, ContentInfiniteScroll } from './styles';
+import {
+  Button,
+  Container,
+  ContentInfiniteScroll,
+  Content,
+} from './styles';
 
 interface ICarrousel extends PropsWithChildren {
   contentSize: number;
@@ -21,10 +26,12 @@ const Carrousel: React.FC<ICarrousel> = ({
 
   const handleScroll = (event: 'next' | 'prev') => {
     if (!infiniteScrollRef && !divRef) return;
+    const valueToScroll = isMobile ? 200 : contentSize;
 
     const { scrollLeft } = infiniteScrollRef.current;
 
-    const valueScroll = event === 'next' ? contentSize : -contentSize;
+    const valueScroll =
+      event === 'next' ? valueToScroll : -valueToScroll;
 
     if (process.env.NODE_ENV !== 'test') {
       infiniteScrollRef.current.scrollTo({
@@ -40,13 +47,7 @@ const Carrousel: React.FC<ICarrousel> = ({
         <PrevArrow />
       </Button>
 
-      <div
-        style={{
-          display: 'flex',
-          width: `calc(100% - 128px)`,
-        }}
-        ref={divRef}
-      >
+      <Content ref={divRef}>
         <ContentInfiniteScroll
           horizontal
           nativeMobileScroll
@@ -54,7 +55,7 @@ const Carrousel: React.FC<ICarrousel> = ({
         >
           {children}
         </ContentInfiniteScroll>
-      </div>
+      </Content>
 
       <Button onClick={() => handleScroll('next')}>
         <RightArrow />

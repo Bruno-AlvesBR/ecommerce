@@ -12,4 +12,6 @@ export const Content = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: '2.5rem',
+
+  [theme?.breakpoints?.down('sm')]: { marginTop: 0 },
 }));

@@ -10,7 +10,7 @@ const PromotionFlag: React.FC<IPromotionFlag> = ({
   discountPercentage,
 }) => (
   <Container>
-    <Typography>{discountPercentage}%</Typography>
+    <Typography>-{discountPercentage}%</Typography>
   </Container>
 );
 

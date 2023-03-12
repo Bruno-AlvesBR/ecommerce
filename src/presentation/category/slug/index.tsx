@@ -4,20 +4,20 @@ import { IProduct } from '@/domain/api/product/entities';
 
 import { Container, Content } from './styles';
 
-interface ITennisPresentation {
-  tennis: IProduct;
+interface ICategorySlugPresentation {
+  product: IProduct;
 }
 
-const TennisPresentation: React.FC<ITennisPresentation> = ({
-  tennis,
-}) => (
+const CategorySlugPresentation: React.FC<
+  ICategorySlugPresentation
+> = ({ product }) => (
   <Container style={{ padding: '2rem' }}>
     <Content>
-      <ImagesStructure images={tennis?.images} />
+      <ImagesStructure images={product?.images} />
 
-      <MainInfos {...tennis} />
+      <MainInfos {...product} />
     </Content>
   </Container>
 );
 
-export { TennisPresentation };
+export { CategorySlugPresentation };

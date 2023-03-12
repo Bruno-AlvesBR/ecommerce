@@ -37,11 +37,12 @@ const HomeBanner: React.FC<IHomeBanner> = ({ banners }) => (
       {banners?.map(banner => (
         <SwiperSlide key={banner?.slug}>
           <Image
-            src={banner?.imageUrl}
+            src={String(banner?.imageUrl)}
             alt={banner?.altText}
             width={2000}
             height={800}
             objectFit="contain"
+            layout="intrinsic"
           />
         </SwiperSlide>
       ))}

@@ -1,7 +1,7 @@
 import { handleFormatProduct } from '@/utils/format/product';
 import { IProductData } from '@/domain/api/product/data';
 
-class TennisController {
+class ProductCategorySlugController {
   private productProvider: IProductData;
 
   constructor(productProvider: IProductData) {
@@ -9,12 +9,12 @@ class TennisController {
   }
 
   async index(slug: string) {
-    const tennis = await this.productProvider.findBySlug(slug);
+    const product = await this.productProvider.findBySlug(slug);
 
-    const formattedTennis = handleFormatProduct(tennis);
+    const formattedProduct = handleFormatProduct(product);
 
-    return { tennis: formattedTennis };
+    return { product: formattedProduct };
   }
 }
 
-export { TennisController };
+export { ProductCategorySlugController };

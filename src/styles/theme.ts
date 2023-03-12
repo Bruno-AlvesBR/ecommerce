@@ -51,7 +51,7 @@ export const ContainerApp = styled(Box)(() => ({
   maxWidth: 1280,
   display: 'flex',
   margin: '0px auto',
-  overflow: 'hidden',
+  // overflow: 'hidden',
 }));
 
 export default theme;
