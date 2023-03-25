@@ -16,6 +16,7 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.6",
     "@mui/styles": "^5.10.3",
+    "@stitches/react": "^1.2.8",
     "axios": "^0.27.2",
     "dayjs": "^1.11.1",
     "eslint-config-prettier": "^8.5.0",
