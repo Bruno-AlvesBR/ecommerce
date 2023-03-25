@@ -16,11 +16,13 @@ import {
 } from '@/domain/user/entities';
 import { AuthenticationProvider as AuthenticationFetchProvider } from '@/providers/authentication';
 import { AUTH_COOKIE } from '@/utils/constants';
+import { cookies } from '@/utils/cookies';
 
 interface IAuthContext {
   user: IUser;
   handleSignup(data: IUserSignup): void;
   handleSignin(data: IUserSignin): void;
+  handleLogout(): void;
   setIsLoading(value: boolean): void;
   isLoading: boolean;
 }
@@ -32,8 +34,7 @@ const AuthContext = createContext({} as IAuthContext);
 const AuthenticationProvider: React.FC<IAuthProvider> = ({
   children,
 }) => {
-  const { push } = useRouter();
-  const cookie = new Cookie();
+  const { push, reload } = useRouter();
   const authenticationFetchProvider =
     new AuthenticationFetchProvider();
 
@@ -41,7 +42,7 @@ const AuthenticationProvider: React.FC<IAuthProvider> = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const recoverUser = useCallback(async () => {
-    const token = cookie.get(AUTH_COOKIE);
+    const token = cookies.get(AUTH_COOKIE);
 
     if (!token) return;
 
@@ -92,12 +93,10 @@ const AuthenticationProvider: React.FC<IAuthProvider> = ({
       if (response) {
         setUser(response);
 
-        console.log('test', response);
-
         const convertUserId = Buffer.from(response?.id).toString(
           'base64',
         );
-        cookie.set(AUTH_COOKIE, convertUserId, {
+        cookies.set(AUTH_COOKIE, convertUserId, {
           maxAge: 60 * 60 * 24,
         });
       }
@@ -111,6 +110,15 @@ const AuthenticationProvider: React.FC<IAuthProvider> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleLogout = useCallback(() => {
+    const token = cookies.get(AUTH_COOKIE);
+
+    if (token) {
+      cookies.remove(AUTH_COOKIE);
+      reload();
+    }
+  }, [reload]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -119,6 +127,7 @@ const AuthenticationProvider: React.FC<IAuthProvider> = ({
         handleSignup,
         isLoading,
         setIsLoading,
+        handleLogout,
       }}
     >
       {children}

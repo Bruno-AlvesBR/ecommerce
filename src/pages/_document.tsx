@@ -5,6 +5,8 @@ import Document, {
   NextScript,
 } from 'next/document';
 
+import { getCssText } from '../styles';
+
 interface DocumentProps {
   disableScripts: boolean;
 }
@@ -30,6 +32,11 @@ export default class MyDocument extends Document<DocumentProps> {
           <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
+          />
+
+          <style
+            id="stitches"
+            dangerouslySetInnerHTML={{ __html: getCssText() }}
           />
         </Head>
         <body>

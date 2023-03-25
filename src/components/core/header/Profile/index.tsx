@@ -8,7 +8,7 @@ interface IProfileProps {
 }
 
 const Profile: React.FC<IProfileProps> = ({ image }) => (
-  <Link href="/perfil" passHref noDecoration>
+  <Link href="/perfil?view=inicio" passHref noDecoration>
     <Container>
       <Avatar variant="square" src={image} />
     </Container>
