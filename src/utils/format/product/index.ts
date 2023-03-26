@@ -12,16 +12,18 @@ const handleFormatProduct = (product: IProductApi): IProduct => ({
   pricePerMonth: product?.price?.installment?.pricePerMonth || '',
   slug: product?.slug || '',
   category: {
-    name: product?.category ? product?.category[0] : '',
-    slug: product?.category
-      ? product?.category[0]?.toLocaleLowerCase()
-      : '',
+    name: product?.category.length > 0 ? product?.category[0] : '',
+    slug:
+      product?.category.length > 0
+        ? product?.category[0]?.toLocaleLowerCase()
+        : '',
   },
   installment: product?.price?.installment?.monthInstallment || 1,
-  isPromotion: product?.isPromotion,
+  isPromotion: product?.isPromotion || null,
   stockQuantity: product?.stock || 0,
   discountPercentage: product?.discountPercentage || null,
   rating: product?.rating || 0,
+  cartId: product?.cartId || null,
 });
 
 export { handleFormatProduct };

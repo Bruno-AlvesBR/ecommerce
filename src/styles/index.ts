@@ -35,6 +35,7 @@ export const { styled, getCssText } = createStitches({
 
       white1000: '#FFFFFF',
       white900: '#F1F0F0',
+      white300: '#F1F0F050',
     },
     fontSizes: spaceObject,
     space: spaceObject,

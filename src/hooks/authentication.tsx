@@ -55,7 +55,8 @@ const AuthenticationProvider: React.FC<IAuthProvider> = ({
         convertToken,
       );
 
-      if (response) setUser(response);
+      if (!response) return;
+      setUser(response);
     } catch {
       setUser({} as IUser);
     }

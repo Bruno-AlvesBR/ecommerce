@@ -6,6 +6,7 @@ export interface IUser {
   };
   email: string;
   password: string;
+  cartId: string;
 }
 
 export interface IUserSignup {

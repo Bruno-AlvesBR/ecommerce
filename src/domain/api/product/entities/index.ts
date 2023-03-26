@@ -3,7 +3,7 @@ export interface IProductApi {
   id?: string;
   title?: string;
   description?: string;
-  category?: string[];
+  category?: Array<string>;
   price?: {
     priceNumber?: string;
     newPriceDiscount?: string;
@@ -23,6 +23,7 @@ export interface IProductApi {
   images: Array<string>;
   createdAt?: string;
   updatedAt?: string;
+  cartId: string;
 }
 
 export interface IProduct {
@@ -45,4 +46,5 @@ export interface IProduct {
   manufacturer: string;
   brand: string;
   rating: number;
+  cartId: string;
 }

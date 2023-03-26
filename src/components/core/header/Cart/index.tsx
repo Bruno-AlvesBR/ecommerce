@@ -1,19 +1,22 @@
-import { Link } from '@/components/ui/Link';
 import CartIcon from '@mui/icons-material/ShoppingCartOutlined';
-import Button from '@mui/material/Button';
+
+import { Link } from '@/components/ui/Link';
+import { useCart } from '@/hooks/cart';
 
 import { Container } from './styles';
 
-interface ICartProps {
-  notifiesCount?: number;
-}
+interface ICartProps {}
 
-const Cart: React.FC<ICartProps> = ({ notifiesCount }) => (
-  <Link href="/carrinho" passHref noDecoration>
-    <Container badgeContent={notifiesCount}>
-      <CartIcon />
-    </Container>
-  </Link>
-);
+const Cart: React.FC<ICartProps> = () => {
+  const { countProducts } = useCart();
+
+  return (
+    <Link href="/carrinho" noDecoration>
+      <Container badgeContent={countProducts}>
+        <CartIcon />
+      </Container>
+    </Link>
+  );
+};
 
 export default Cart;
