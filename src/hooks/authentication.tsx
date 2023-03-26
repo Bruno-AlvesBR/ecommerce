@@ -18,12 +18,12 @@ import { AuthenticationProvider as AuthenticationFetchProvider } from '@/provide
 import { AUTH_COOKIE } from '@/utils/constants';
 import { cookies } from '@/utils/cookies';
 
-interface IAuthContext {
+export interface IAuthContext {
   user: IUser;
-  handleSignup(data: IUserSignup): void;
-  handleSignin(data: IUserSignin): void;
-  handleLogout(): void;
-  setIsLoading(value: boolean): void;
+  handleSignup?(data: IUserSignup): void;
+  handleSignin?(data: IUserSignin): void;
+  handleLogout?(): void;
+  setIsLoading?(value: boolean): void;
   isLoading: boolean;
 }
 

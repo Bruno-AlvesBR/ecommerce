@@ -8,14 +8,18 @@ const ProfileInitial: React.FC<IProfileInitial> = ({}) => {
   const { handleLogout, user } = useAuth();
 
   return (
-    <Container>
+    <Container data-testid="profile-initial-menu">
       <ContentHeader>
-        {user.name && (
-          <Title>Seja bem-indo (a), {user.name?.firstName}.</Title>
+        {user?.name && (
+          <Title data-testid="heading-user-name">
+            Seja bem-indo (a), {user.name?.firstName}.
+          </Title>
         )}
       </ContentHeader>
 
-      <Button onClick={handleLogout}>SAIR</Button>
+      <Button data-testid="exit-button" onClick={handleLogout}>
+        SAIR
+      </Button>
     </Container>
   );
 };
