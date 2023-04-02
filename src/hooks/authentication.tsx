@@ -7,7 +7,6 @@ import {
   useState,
 } from 'react';
 import { useRouter } from 'next/router';
-import Cookie from 'universal-cookie';
 
 import {
   IUser,
@@ -34,7 +33,7 @@ const AuthContext = createContext({} as IAuthContext);
 const AuthenticationProvider: React.FC<IAuthProvider> = ({
   children,
 }) => {
-  const { push, reload } = useRouter();
+  const { push, reload, query, isReady } = useRouter();
   const authenticationFetchProvider =
     new AuthenticationFetchProvider();
 
@@ -85,31 +84,39 @@ const AuthenticationProvider: React.FC<IAuthProvider> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSignin = useCallback(async (data: IUserSignin) => {
-    try {
-      setIsLoading(true);
+  const handleSignin = useCallback(
+    async (data: IUserSignin) => {
+      try {
+        setIsLoading(true);
 
-      const response = await authenticationFetchProvider.signin(data);
-
-      if (response) {
-        setUser(response);
-
-        const convertUserId = Buffer.from(response?.id).toString(
-          'base64',
+        const response = await authenticationFetchProvider.signin(
+          data,
         );
-        cookies.set(AUTH_COOKIE, convertUserId, {
-          maxAge: 60 * 60 * 24,
-        });
-      }
 
-      push('/');
-    } catch (error) {
-      throw new Error(error);
-    } finally {
-      setIsLoading(false);
-    }
+        if (response) {
+          setUser(response);
+
+          const convertUserId = Buffer.from(response?.id).toString(
+            'base64',
+          );
+          cookies.set(AUTH_COOKIE, convertUserId, {
+            maxAge: 60 * 60 * 24,
+          });
+        }
+
+        if (isReady && query) {
+          const { redirect } = query;
+          push(redirect.toString() || '/');
+        }
+      } catch (error) {
+        throw new Error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    [query, isReady],
+  );
 
   const handleLogout = useCallback(() => {
     const token = cookies.get(AUTH_COOKIE);

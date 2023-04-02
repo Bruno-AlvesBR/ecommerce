@@ -1,10 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useRouter } from 'next/router';
-import Cookie from 'universal-cookie';
+import { useState } from 'react';
 
 import { Signup } from '@/components/core/Authentication/Signup';
 import { useAuth } from '@/hooks/authentication';
-import { AUTH_COOKIE } from '@/utils/constants';
 
 import { Container } from '../styles';
 
@@ -17,23 +14,13 @@ export interface ISignupFormData {
 }
 
 const SignupPresentation = () => {
-  const { handleSignup, isLoading, setIsLoading } = useAuth();
-  const cookie = new Cookie();
-  const { push } = useRouter();
-
-  useEffect(() => {
-    if (!cookie.get(AUTH_COOKIE)) return;
-
-    setIsLoading(true);
-    push('/');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { handleSignup, isLoading } = useAuth();
 
   const [isError, setIsError] = useState(false);
 
   const onSubmit = async (data: ISignupFormData) => {
-    const passwordMatch = data?.password?.includes(
-      String(data?.confirmPassword),
+    const passwordMatch = data.password.includes(
+      String(data.confirmPassword),
     );
 
     if (passwordMatch) {

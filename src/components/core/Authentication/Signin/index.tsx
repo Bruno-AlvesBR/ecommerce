@@ -18,7 +18,7 @@ interface ISignin {
   };
 }
 
-const Signin: React.FC<ISignin> = ({ onSubmit, field, form }) => {
+const Signin: React.FC<ISignin> = ({ onSubmit, form }) => {
   const validationForm = object({
     email: string()
       .required('Campo de email obrigatório!')
@@ -43,7 +43,7 @@ const Signin: React.FC<ISignin> = ({ onSubmit, field, form }) => {
           name="email"
           {...register('email')}
           type="email"
-          label={errors?.email?.message.toString() || 'Email'}
+          label={errors.email?.message.toString() || 'Email'}
           placeholder="Insira seu email"
           error={!!errors?.email?.message}
           fullWidth
@@ -52,9 +52,9 @@ const Signin: React.FC<ISignin> = ({ onSubmit, field, form }) => {
           name="password"
           {...register('password')}
           type="password"
-          label={errors?.password?.message.toString() || 'Senha'}
+          label={errors.password?.message.toString() || 'Senha'}
           placeholder="Insira sua senha"
-          error={!!errors?.password?.message}
+          error={!!errors.password?.message}
           fullWidth
         />
       </Content>
@@ -63,7 +63,7 @@ const Signin: React.FC<ISignin> = ({ onSubmit, field, form }) => {
         Não tem conta? Clique aqui
       </Link>
 
-      <Button type="submit" disabled={form?.isLoading} fullWidth>
+      <Button type="submit" disabled={form.isLoading} fullWidth>
         ENTRAR
       </Button>
     </Container>
