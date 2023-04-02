@@ -106,7 +106,9 @@ const AuthenticationProvider: React.FC<IAuthProvider> = ({
 
         if (isReady && query) {
           const { redirect } = query;
-          push(redirect.toString() || '/');
+          push(redirect.toString());
+        } else {
+          push('/');
         }
       } catch (error) {
         throw new Error(error);
