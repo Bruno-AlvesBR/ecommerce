@@ -1,6 +1,6 @@
 import { GetStaticProps, NextPage } from 'next';
 
-import HomePresentation from '@/presentation/home';
+import HomePresentation from '@/presentation/pages/home';
 import { HomeController } from '@/infra/http/controllers/home';
 import { IHome } from '@/domain/home/entities';
 import { ProductProvider } from '@/providers/product';

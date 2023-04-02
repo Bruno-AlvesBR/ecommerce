@@ -5,7 +5,7 @@ import { CartController } from '@/infra/http/controllers/cart';
 import { CartProvider } from '@/providers/cart';
 import { ICartProduct } from '@/domain/cart/entities';
 import { AuthenticationProvider } from '@/providers/authentication';
-import { CartPresentation } from '@/presentation/cart';
+import { CartPresentation } from '@/presentation/pages/cart';
 
 interface ICart {
   products: Array<ICartProduct>;

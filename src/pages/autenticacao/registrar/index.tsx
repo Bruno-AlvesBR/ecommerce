@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 
-import { SignupPresentation } from '@/presentation/authentication/signup';
+import { SignupPresentation } from '@/presentation/pages/authentication/signup';
 
 const Signup: NextPage = () => <SignupPresentation />;
 

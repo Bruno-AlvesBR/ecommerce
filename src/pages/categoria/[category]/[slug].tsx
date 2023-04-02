@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { ProductCategorySlugController } from '@/infra/http/controllers/category/slug';
 import { IProduct } from '@/domain/api/product/entities';
 import { ProductProvider } from '@/providers/product';
-import { CategorySlugPresentation } from '@/presentation/category/slug';
+import { CategorySlugPresentation } from '@/presentation/pages/category/slug';
 
 interface ICategorySlug {
   product: IProduct;

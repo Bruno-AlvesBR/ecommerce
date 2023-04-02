@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { CategoryController } from '@/infra/http/controllers/category';
 import { ProductProvider } from '@/providers/product';
 import { IProduct } from '@/domain/api/product/entities';
-import { CategoryPresentation } from '@/presentation/category';
+import { CategoryPresentation } from '@/presentation/pages/category';
 
 interface ITenisPage {
   products: Array<IProduct>;

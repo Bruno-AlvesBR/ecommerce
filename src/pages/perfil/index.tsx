@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 
-import { ProfilePresentation } from '@/presentation/profile';
+import { ProfilePresentation } from '@/presentation/pages/profile';
 
 const Perfil = () => <ProfilePresentation />;
 

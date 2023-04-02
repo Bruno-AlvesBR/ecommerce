@@ -5,7 +5,7 @@ import Document, {
   NextScript,
 } from 'next/document';
 
-import { getCssText } from '../styles';
+import { getCssText } from '../presentation/styles';
 
 interface DocumentProps {
   disableScripts: boolean;
