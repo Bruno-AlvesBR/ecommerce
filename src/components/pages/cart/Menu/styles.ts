@@ -6,4 +6,5 @@ export const Container = styled('div', {
   height: 400,
   backgroundColor: '$white1000',
   borderRadius: 4,
+  padding: '$4',
 });

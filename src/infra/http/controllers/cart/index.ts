@@ -1,6 +1,6 @@
 import { ICartData } from '@/domain/api/cart/data';
 import { IAuthenticationData } from '@/domain/authentication/data';
-import { handleFormatProduct } from '@/utils/format/product';
+import { ICartProduct } from '@/domain/cart/entities';
 
 class CartController {
   private cartProvider: ICartData;
@@ -18,8 +18,15 @@ class CartController {
     const user = await this.authProvider.recover(id);
     const products = await this.cartProvider.findAll(user.cartId);
 
-    const formattedProducts = products.map(product =>
-      handleFormatProduct(product),
+    const formattedProducts: Array<ICartProduct> = products.map(
+      product => ({
+        id: product.id,
+        title: product.title,
+        slug: product.slug,
+        category: product.category,
+        images: product.images,
+        price: product.price,
+      }),
     );
 
     return { products: formattedProducts };

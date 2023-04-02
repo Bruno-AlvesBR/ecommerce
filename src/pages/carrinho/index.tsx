@@ -3,12 +3,12 @@ import React from 'react';
 
 import { CartController } from '@/infra/http/controllers/cart';
 import { CartProvider } from '@/providers/cart';
-import { IProduct } from '@/domain/api/product/entities';
+import { ICartProduct } from '@/domain/cart/entities';
 import { AuthenticationProvider } from '@/providers/authentication';
 import { CartPresentation } from '@/presentation/cart';
 
 interface ICart {
-  products: Array<IProduct>;
+  products: Array<ICartProduct>;
 }
 
 const Cart: NextPage<ICart> = props => (
@@ -36,5 +36,9 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     };
   }
 };
+
+// export const getServerSideProps: GetServerSideProps = async ctx => ({
+//   props: {},
+// });
 
 export default Cart;

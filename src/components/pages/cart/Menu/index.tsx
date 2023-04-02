@@ -1,5 +1,16 @@
+import { ICartProduct } from '@/domain/cart/entities';
 import { Container } from './styles';
 
-const CartMenu = () => <Container></Container>;
+interface ICartMenu {
+  products: Array<ICartProduct>;
+}
+
+const CartMenu: React.FC<ICartMenu> = ({ products }) => (
+  <Container>
+    {products?.map(item => (
+      <p key={item.id}>{item.price?.priceNumber}</p>
+    ))}
+  </Container>
+);
 
 export { CartMenu };

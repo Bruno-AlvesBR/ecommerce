@@ -1,13 +1,13 @@
 import { CartMenu } from '@/components/pages/cart/Menu';
 import { CartProducts } from '@/components/pages/cart/Products';
-import { IProduct } from '@/domain/api/product/entities';
+import { ICartProduct } from '@/domain/cart/entities';
 import { useCart } from '@/hooks/cart';
 import { useEffect } from 'react';
 
 import { Container, Content } from './styles';
 
 interface ICartPresentation {
-  products: Array<IProduct>;
+  products: Array<ICartProduct>;
 }
 
 const CartPresentation: React.FC<ICartPresentation> = ({
@@ -16,7 +16,7 @@ const CartPresentation: React.FC<ICartPresentation> = ({
   const { setCountProducts } = useCart();
 
   useEffect(() => {
-    if (products.length) setCountProducts(products.length);
+    if (products?.length) setCountProducts(products.length);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products]);
 
@@ -25,7 +25,7 @@ const CartPresentation: React.FC<ICartPresentation> = ({
       <Content>
         <CartProducts products={products} />
 
-        <CartMenu />
+        <CartMenu products={products} />
       </Content>
     </Container>
   );

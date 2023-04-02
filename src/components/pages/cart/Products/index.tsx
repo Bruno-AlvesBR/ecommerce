@@ -2,7 +2,7 @@ import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import Image from 'next/image';
 import { memo } from 'react';
 
-import { IProduct } from '@/domain/api/product/entities';
+import { ICartProduct } from '@/domain/cart/entities';
 import { useCart } from '@/hooks/cart';
 
 import {
@@ -14,7 +14,7 @@ import {
 } from './styles';
 
 interface ICartProducts {
-  products: Array<IProduct>;
+  products: Array<ICartProduct>;
 }
 
 const Products: React.FC<ICartProducts> = ({ products }) => {
@@ -22,7 +22,7 @@ const Products: React.FC<ICartProducts> = ({ products }) => {
 
   return (
     <Container>
-      {products.length > 0 &&
+      {products?.length > 0 &&
         products.map(product => (
           <Card key={product.id}>
             <Image
@@ -35,11 +35,14 @@ const Products: React.FC<ICartProducts> = ({ products }) => {
             />
 
             <Title
-              href={`/categoria/${product.category.slug}/${product.slug}`}
+              href={`/categoria/${product.category}/${product.slug}`}
             >
               {product.title}
             </Title>
-            <Price>{product.newPriceDiscount || product.price}</Price>
+            <Price>
+              {product.price.newPriceDiscount ||
+                product.price.priceNumber}
+            </Price>
 
             <DeleteButton
               onClick={() => handleRemoveProduct(product.id)}
