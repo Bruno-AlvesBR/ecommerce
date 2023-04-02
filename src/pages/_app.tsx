@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 
+import { HeadTitle } from '@/components/core/HeadTitle';
 import Header from '@/components/core/header';
 import { AllProviders } from '../hooks';
 
@@ -14,6 +15,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
 
     <AllProviders>
       <Header />
+      <HeadTitle />
 
       <ContainerApp>
         <Component {...pageProps} />
