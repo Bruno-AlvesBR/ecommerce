@@ -14,14 +14,6 @@ export const Container = styled(Box)(() => ({
   height: 'fit-content',
 }));
 
-export const Title = styled(Typography)(({ theme }) => ({
-  fontSize: '1.5rem',
-  fontWeight: 400,
-  lineHeight: '26px',
-  color: theme?.palette?.primary?.dark,
-  zIndex: 1,
-}));
-
 export const Contents = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',

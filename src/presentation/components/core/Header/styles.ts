@@ -28,6 +28,8 @@ export const Content = styled(Toolbar)(({ theme }) => ({
   gap: '2rem',
 
   '&.MuiToolbar-root': { padding: 0 },
+
+  [theme.breakpoints.down('md')]: { gap: '1rem' },
 }));
 
 export const RightContent = styled(Box)(() => ({

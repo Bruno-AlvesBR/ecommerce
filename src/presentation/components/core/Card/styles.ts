@@ -1,7 +1,6 @@
 import { styled, Theme } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Image from 'next/image';
 
 interface IPrice {
   hasPromotion?: boolean;
@@ -9,7 +8,7 @@ interface IPrice {
 }
 
 export const Container = styled(Box)(({ theme }) => ({
-  width: 300,
+  minWidth: 300,
   maxWidth: 300,
   minHeight: 360,
   maxHeight: 360,
@@ -21,6 +20,7 @@ export const Container = styled(Box)(({ theme }) => ({
   padding: '8px 32px 32px 32px',
   justifyContent: 'space-between',
   position: 'relative',
+  scrollSnapAlign: 'start',
 }));
 
 export const Title = styled(Typography)(({ theme }) => ({

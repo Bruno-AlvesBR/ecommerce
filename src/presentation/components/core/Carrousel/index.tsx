@@ -1,7 +1,13 @@
 import PrevArrow from '@mui/icons-material/ArrowBackIos';
 import RightArrow from '@mui/icons-material/ArrowForwardIos';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { PropsWithChildren, useRef } from 'react';
+import {
+  PropsWithChildren,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import theme from '@/presentation/styles/theme';
 import {
@@ -9,29 +15,43 @@ import {
   Container,
   ContentInfiniteScroll,
   Content,
+  ContentHeader,
+  Title,
+  HeaderButton,
+  ContentHeaderButtons,
 } from './styles';
 
 interface ICarrousel extends PropsWithChildren {
-  contentSize: number;
+  title: string;
+  itemId: string;
 }
 
 const Carrousel: React.FC<ICarrousel> = ({
   children,
-  contentSize,
+  title,
+  itemId,
 }) => {
   const infiniteScrollRef = useRef<HTMLDivElement>(null);
   const divRef = useRef<HTMLDivElement>(null);
-
   const isMobile = useMediaQuery(theme?.breakpoints?.down('sm'));
+
+  const [currentStep, setCurrentStep] = useState<number>(0);
 
   const handleScroll = (event: 'next' | 'prev') => {
     if (!infiniteScrollRef && !divRef) return;
-    const valueToScroll = isMobile ? 200 : contentSize;
+
+    const nextEvent = event === 'next';
+    const elementWidth =
+      document.querySelector(`#${itemId}`).scrollWidth || 0;
+
+    nextEvent
+      ? setCurrentStep(currentStep + 1)
+      : setCurrentStep(currentStep - 1);
+
+    const valueToScroll = isMobile ? elementWidth : elementWidth * 3;
 
     const { scrollLeft } = infiniteScrollRef.current;
-
-    const valueScroll =
-      event === 'next' ? valueToScroll : -valueToScroll;
+    const valueScroll = nextEvent ? valueToScroll : -valueToScroll;
 
     if (process.env.NODE_ENV !== 'test') {
       infiniteScrollRef.current.scrollTo({
@@ -43,23 +63,33 @@ const Carrousel: React.FC<ICarrousel> = ({
 
   return (
     <Container>
-      <Button onClick={() => handleScroll('prev')}>
-        <PrevArrow />
-      </Button>
+      <ContentHeader>
+        <Title>{title}</Title>
+
+        <ContentHeaderButtons>
+          <HeaderButton onClick={() => handleScroll('prev')}>
+            <PrevArrow />
+          </HeaderButton>
+
+          <HeaderButton onClick={() => handleScroll('next')}>
+            <RightArrow />
+          </HeaderButton>
+        </ContentHeaderButtons>
+      </ContentHeader>
 
       <Content ref={divRef}>
-        <ContentInfiniteScroll
-          horizontal
-          nativeMobileScroll
-          innerRef={infiniteScrollRef}
-        >
+        <Button onClick={() => handleScroll('prev')}>
+          <PrevArrow />
+        </Button>
+
+        <ContentInfiniteScroll ref={infiniteScrollRef}>
           {children}
         </ContentInfiniteScroll>
-      </Content>
 
-      <Button onClick={() => handleScroll('next')}>
-        <RightArrow />
-      </Button>
+        <Button onClick={() => handleScroll('next')}>
+          <RightArrow />
+        </Button>
+      </Content>
     </Container>
   );
 };

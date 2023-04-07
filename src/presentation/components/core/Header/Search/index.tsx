@@ -1,11 +1,9 @@
-import { Link } from '@/presentation/components/ui/Link';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import { useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import { Input, ButtonSearch, Container } from './styles';
-import { Box } from '@mui/material';
-import { useRouter } from 'next/router';
 
 const Search: React.FC = () => {
   const buttonRef = useRef(null);

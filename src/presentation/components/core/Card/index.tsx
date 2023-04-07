@@ -57,7 +57,7 @@ const DefaultCard: React.FC<IProduct> = props => {
   );
 
   return props ? (
-    <Container>
+    <Container id="card">
       {discountPercentage && (
         <PromotionFlag discountPercentage={discountPercentage} />
       )}

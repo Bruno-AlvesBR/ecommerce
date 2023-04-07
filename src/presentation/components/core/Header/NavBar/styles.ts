@@ -13,10 +13,9 @@ export const Container = styled(Box)(() => ({
   padding: 0,
   overflowX: 'auto',
   position: 'relative',
+  scrollSnapType: 'x mandatory',
 
-  '&::-webkit-scrollbar': {
-    display: 'none',
-  },
+  '&::-webkit-scrollbar': { display: 'none' },
 }));
 
 interface IContentProps {
@@ -37,6 +36,7 @@ export const Item = styled(Link)<IContentProps>(
     transition: '.3s all ease',
     textTransform: 'uppercase',
     borderRadius: '4px 4px 0 0',
+    scrollSnapAlign: 'start',
 
     '&:hover': {
       background: theme?.palette?.background?.paper,

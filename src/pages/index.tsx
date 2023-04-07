@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
     return {
       props,
-      revalidate: 1,
+      revalidate: 600,
     };
   } catch {
     return {
@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps = async () => {
         releases: [],
         promotions: [],
       },
-      revalidate: 1,
+      revalidate: 60,
     };
   }
 };

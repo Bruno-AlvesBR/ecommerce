@@ -44,12 +44,13 @@ const ImagesStructure: React.FC<IIMageStructure> = ({ images }) => {
     <Container>
       <ContentMainImage>{treatedImage}</ContentMainImage>
 
-      <Carrousel contentSize={100}>
+      <Carrousel title={undefined} itemId="card-image">
         {images?.map((image, index: number) => (
           <ContentAltImage
             key={index}
             isSelected={mainUrl === image}
             onClick={() => setMainUrl(image)}
+            id="card-image"
           >
             <Image
               key={image}
