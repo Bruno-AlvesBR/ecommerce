@@ -16,11 +16,6 @@ const GlobalStyles = createGlobalStyle`
     background: #aaaaaa15;
     overflow-x: hidden;
   }
-
-  .body-no-wrap {
-    display: flex;
-    flex-direction: row;
-  }
 `;
 
 export default GlobalStyles;
