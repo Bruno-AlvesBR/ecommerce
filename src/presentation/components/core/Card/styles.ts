@@ -7,22 +7,6 @@ interface IPrice {
   theme?: Theme;
 }
 
-export const Container = styled(Box)(({ theme }) => ({
-  minWidth: 300,
-  maxWidth: 300,
-  minHeight: 360,
-  maxHeight: 360,
-  border: `0.5px solid ${theme?.palette?.primary?.dark}`,
-  borderRadius: 5,
-  background: theme?.palette?.common?.white,
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '8px 32px 32px 32px',
-  justifyContent: 'space-between',
-  position: 'relative',
-  scrollSnapAlign: 'start',
-}));
-
 export const Title = styled(Typography)(({ theme }) => ({
   textAlign: 'center',
   display: '-webkit-box',

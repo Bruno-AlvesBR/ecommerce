@@ -4,8 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { object, string } from 'yup';
 
 import { ISigninFormData } from '@/presentation/pages/authentication/signin';
-
-import { Container, Content, Title, Button, Link } from '../styles';
+import { Link } from '@/presentation/components/ui/Link';
+import { Button } from '../../Button';
 
 interface ISignin {
   onSubmit(data: ISigninFormData): void;
@@ -35,10 +35,13 @@ const Signin: React.FC<ISignin> = ({ onSubmit, form }) => {
   });
 
   return (
-    <Container onSubmit={handleSubmit(onSubmit)}>
-      <Title variant="h1">Logar</Title>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="sm:p-8 sm:w-full flex flex-col justify-center items-left relative w-[500px] max-w-[500px] gap-8 bg-white1000 p-16 rounded-[6px] shadow-gray400"
+    >
+      <h1 className="text-8 font-bold text-center">Logar</h1>
 
-      <Content>
+      <div className="flex flex-col justify-center items-center relative w-full gap-4">
         <TextField
           name="email"
           {...register('email')}
@@ -57,7 +60,7 @@ const Signin: React.FC<ISignin> = ({ onSubmit, form }) => {
           error={!!errors.password?.message}
           fullWidth
         />
-      </Content>
+      </div>
 
       <Link href="/autenticacao/registrar">
         Não tem conta? Clique aqui
@@ -66,7 +69,7 @@ const Signin: React.FC<ISignin> = ({ onSubmit, form }) => {
       <Button type="submit" disabled={form.isLoading} fullWidth>
         ENTRAR
       </Button>
-    </Container>
+    </form>
   );
 };
 

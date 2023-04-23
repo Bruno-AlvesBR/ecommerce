@@ -1,7 +1,7 @@
 import { ImagesStructure } from '@/presentation/components/core/ProductStructure/Images';
 import { MainInfos } from '@/presentation/components/core/ProductStructure/MainInfos';
 import { IProduct } from '@/domain/api/product/entities';
-import { ButtonUI } from '@/presentation/components/core/Button';
+import { Button } from '@/presentation/components/core/Button';
 import { useCart } from '@/presentation/hooks/cart';
 
 import {
@@ -27,12 +27,12 @@ const CategorySlugPresentation: React.FC<
         <ContentProductDescription>
           <MainInfos {...product} />
 
-          <ButtonUI
+          <Button
             fullWidth
             onClick={() => handleAddProductInCart(product.id)}
           >
             ADICIONAR AO CARRINHO
-          </ButtonUI>
+          </Button>
         </ContentProductDescription>
       </Content>
     </Container>

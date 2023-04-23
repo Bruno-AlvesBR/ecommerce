@@ -1,13 +1,18 @@
 import { useRouter } from 'next/router';
-import { ButtonLogo } from './styles';
+
+import { Link } from '@/presentation/components/ui/Link';
 
 const Logo: React.FC = () => {
   const { pathname } = useRouter();
 
   return (
-    <ButtonLogo href="/" noDecoration={!!pathname.split('/')[1]}>
+    <Link
+      href="/"
+      className="sm:text-6 text-8 text-blue700 uppercase font-bold underline w-fit"
+      noDecoration={!!pathname.split('/')[1]}
+    >
       Dunked
-    </ButtonLogo>
+    </Link>
   );
 };
 

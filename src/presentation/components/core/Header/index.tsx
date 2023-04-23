@@ -1,18 +1,15 @@
-import SearchIcon from '@mui/icons-material/Search';
-import CloseIcon from '@mui/icons-material/Close';
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import Logo from './Logo';
-import Profile from './Profile';
-import Chart from './Cart';
+import { Profile } from './Profile';
+import { Cart } from './Cart';
 import Search from './Search';
-import NavBar from './NavBar';
-import { ContentMobile } from '../../ui/Views/mobile';
-import { ContentDesktop } from '../../ui/Views/desktop';
-
-import { Container, Content, RightContent } from './styles';
-import { Input, ButtonSearch } from './Search/styles';
+import { NavBar } from './NavBar';
+import { MobileView } from '../../ui/Views/mobile';
+import { DesktopView } from '../../ui/Views/desktop';
+import { Input } from './Search/Input';
+import { Button } from './Search/Button';
 
 const Header: React.FC = () => {
   const buttonRef = useRef(null);
@@ -28,42 +25,38 @@ const Header: React.FC = () => {
   };
 
   return (
-    <Container>
-      <Content>
+    <div className="sm:gap-1 sm:pt-0 lg:px-2 relative pt-1 bg-white1000 border-b-[1px] border-black1000 flex p-0 flex-col gap-2">
+      <div className="md:gap-4 relative w-full max-w-[1280px] flex items-center justify-between flex-row mx-auto gap-8 h-full">
         <Logo />
-
-        <RightContent>
-          <ContentDesktop fullWidth>
+        <div className="sm:gap-2 relative w-full flex items-center justify-end gap-4">
+          <DesktopView fullWidth>
             <Search />
-          </ContentDesktop>
+          </DesktopView>
 
-          <ContentMobile>
-            <ButtonSearch
-              ref={buttonRef}
+          <MobileView>
+            <Button
+              buttonRef={buttonRef}
               isOpenSearch={isOpenSearch}
-              onClick={() => setIsOpenSearch(!isOpenSearch)}
-            >
-              {isOpenSearch ? <SearchIcon /> : <CloseIcon />}
-            </ButtonSearch>
-          </ContentMobile>
+              setIsOpenSearch={setIsOpenSearch}
+            />
+          </MobileView>
 
           <Profile />
-          <Chart />
-        </RightContent>
-      </Content>
+          <Cart />
+        </div>
+      </div>
 
-      <ContentMobile fullWidth>
+      <MobileView fullWidth>
         <Input
-          placeholder="Pesquise aqui..."
           isOpenSearch={isOpenSearch}
-          onKeyDown={handlePressKey}
-          onChange={event => setTerm(event.target.value)}
+          handlePressKey={handlePressKey}
+          setTerm={setTerm}
         />
-      </ContentMobile>
+      </MobileView>
 
       <NavBar />
-    </Container>
+    </div>
   );
 };
 
-export default Header;
+export { Header };

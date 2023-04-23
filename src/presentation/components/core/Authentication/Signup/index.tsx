@@ -4,9 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { object, string } from 'yup';
 
 import { ISignupFormData } from '@/presentation/pages/authentication/signup';
-
-import { Container, Content, Title, Button, Link } from '../styles';
-import { ContentWrapperFields } from './styles';
+import { Link } from '@/presentation/components/ui/Link';
+import { Button } from '../../Button';
 
 interface ISignup {
   onSubmit(data: ISignupFormData): void;
@@ -44,11 +43,14 @@ const Signup: React.FC<ISignup> = ({ onSubmit, field, form }) => {
     field?.errorText || errors[fieldType]?.message.toString();
 
   return (
-    <Container onSubmit={handleSubmit(onSubmit)}>
-      <Title variant="h1">Registrar</Title>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="sm:p-8 sm:w-full flex flex-col justify-center items-left relative w-[500px] max-w-[500px] gap-8 bg-white1000 p-16 rounded-[6px] shadow-gray400"
+    >
+      <h1 className="text-8 font-bold text-center">Registrar</h1>
 
-      <Content>
-        <ContentWrapperFields>
+      <div className="flex flex-col justify-center items-center relative w-full gap-4">
+        <div className="flex flex-row gap-2 w-full sm:flex-col sm:gap-4">
           <TextField
             name="firstName"
             {...register('firstName')}
@@ -69,7 +71,7 @@ const Signup: React.FC<ISignup> = ({ onSubmit, field, form }) => {
             placeholder="Último nome"
             fullWidth
           />
-        </ContentWrapperFields>
+        </div>
 
         <TextField
           name="email"
@@ -99,7 +101,7 @@ const Signup: React.FC<ISignup> = ({ onSubmit, field, form }) => {
           placeholder="Confirmar senha"
           fullWidth
         />
-      </Content>
+      </div>
 
       <Link href="/autenticacao/logar">
         Já tem conta? Clique aqui
@@ -108,7 +110,7 @@ const Signup: React.FC<ISignup> = ({ onSubmit, field, form }) => {
       <Button type="submit" disabled={form?.isLoading} fullWidth>
         CADASTRAR
       </Button>
-    </Container>
+    </form>
   );
 };
 

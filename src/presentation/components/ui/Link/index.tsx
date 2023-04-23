@@ -1,20 +1,30 @@
-import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import { PropsWithChildren, useMemo } from 'react';
+import NextLink from 'next/link';
+import {
+  AnchorHTMLAttributes,
+  DetailedHTMLProps,
+  PropsWithChildren,
+  useMemo,
+} from 'react';
 
-export interface ILink extends NextLinkProps {
+export interface ILink
+  extends DetailedHTMLProps<
+      AnchorHTMLAttributes<HTMLAnchorElement>,
+      HTMLAnchorElement
+    >,
+    PropsWithChildren {
   noDecoration?: boolean;
   disabled?: boolean;
-  target?: string;
   onClick?: () => void;
 }
 
-const Link: React.FC<PropsWithChildren<ILink>> = ({
+const Link: React.FC<ILink> = ({
   href,
   children,
   noDecoration,
   disabled,
   target,
   onClick,
+  className,
   ...props
 }) => {
   const styles = useMemo(() => {
@@ -29,10 +39,11 @@ const Link: React.FC<PropsWithChildren<ILink>> = ({
   }, [noDecoration, disabled]);
 
   return (
-    <NextLink href={href}>
+    <NextLink href={href} passHref>
       <a
         style={styles}
         target={target}
+        className={`text-blue700 text-4 hover:underline focus:underline w-fit outline-blue700 ${className}`}
         {...props}
         onClick={onClick}
         onKeyDown={onClick}

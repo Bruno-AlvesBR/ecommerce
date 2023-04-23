@@ -4,11 +4,13 @@ import { Theme } from '@mui/material';
 
 const CardSkeleton: React.FC = (theme: Theme) => (
   <Box
+    id="card"
     display="flex"
     flexDirection="column"
     sx={{
       background: theme?.palette?.common?.white,
       border: `0.5px solid #000`,
+      scrollSnapAlign: 'start',
     }}
     minWidth={300}
     minHeight={360}

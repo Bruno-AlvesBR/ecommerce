@@ -8,7 +8,6 @@ import CardSkeleton from './Skeleton';
 import { PromotionFlag } from '../PromotionFlag';
 
 import {
-  Container,
   Title,
   ContentPrice,
   Price,
@@ -56,8 +55,11 @@ const DefaultCard: React.FC<IProduct> = props => {
     [mainImage],
   );
 
-  return props ? (
-    <Container id="card">
+  return props.id ? (
+    <div
+      id="card"
+      className="border-[0.5px] border-black1000 pt-2 px-8 pb-8 relative flex flex-col justify-between snap-start bg-white1000 rounded-2 min-w-[300px] max-w-[300px] min-h-[360px] max-h-[360px]"
+    >
       {discountPercentage && (
         <PromotionFlag discountPercentage={discountPercentage} />
       )}
@@ -68,7 +70,6 @@ const DefaultCard: React.FC<IProduct> = props => {
 
         <Link
           href={`/categoria/${category?.slug}/${slug}`}
-          passHref
           noDecoration
         >
           <Title>{title}</Title>
@@ -102,7 +103,7 @@ const DefaultCard: React.FC<IProduct> = props => {
 
       {images?.length > 0 && (
         <ContentAlternativeImages>
-          {images?.map((image, index: number) => (
+          {images.slice(0, 3).map((image, index: number) => (
             <AltImage key={index}>
               <Image
                 onClick={() => setMainImage(image)}
@@ -115,7 +116,7 @@ const DefaultCard: React.FC<IProduct> = props => {
           ))}
         </ContentAlternativeImages>
       )}
-    </Container>
+    </div>
   ) : (
     <CardSkeleton />
   );

@@ -2,8 +2,7 @@ import CartIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 import { Link } from '@/presentation/components/ui/Link';
 import { useCart } from '@/presentation/hooks/cart';
-
-import { Container } from './styles';
+import { Badge } from '@/presentation/components/core/Badge';
 
 interface ICartProps {}
 
@@ -12,11 +11,11 @@ const Cart: React.FC<ICartProps> = () => {
 
   return (
     <Link href="/carrinho" noDecoration>
-      <Container badgeContent={countProducts}>
-        <CartIcon />
-      </Container>
+      <Badge count={2}>
+        <CartIcon className="w-8 h-8" />
+      </Badge>
     </Link>
   );
 };
 
-export default Cart;
+export { Cart };

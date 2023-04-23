@@ -1,9 +1,8 @@
-import SearchIcon from '@mui/icons-material/Search';
-import CloseIcon from '@mui/icons-material/Close';
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { Input, ButtonSearch, Container } from './styles';
+import { Input } from './Input';
+import { Button } from './Button';
 
 const Search: React.FC = () => {
   const buttonRef = useRef(null);
@@ -19,21 +18,18 @@ const Search: React.FC = () => {
   };
 
   return (
-    <Container>
+    <div className="flex flex-row items-center justify-end min-h-10 max-h-10 flex-1">
       <Input
-        placeholder="Pesquise aqui..."
         isOpenSearch={isOpenSearch}
-        onKeyDown={handlePressKey}
-        onChange={event => setTerm(event.target.value)}
+        handlePressKey={handlePressKey}
+        setTerm={setTerm}
       />
-      <ButtonSearch
-        ref={buttonRef}
+      <Button
         isOpenSearch={isOpenSearch}
-        onClick={() => setIsOpenSearch(!isOpenSearch)}
-      >
-        {isOpenSearch ? <SearchIcon /> : <CloseIcon />}
-      </ButtonSearch>
-    </Container>
+        setIsOpenSearch={setIsOpenSearch}
+        buttonRef={buttonRef}
+      />
+    </div>
   );
 };
 

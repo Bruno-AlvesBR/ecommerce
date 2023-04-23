@@ -1,25 +1,9 @@
-import PrevArrow from '@mui/icons-material/ArrowBackIos';
-import RightArrow from '@mui/icons-material/ArrowForwardIos';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import {
-  PropsWithChildren,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { PropsWithChildren, useRef, useState } from 'react';
+import IndianaScroll from 'react-indiana-drag-scroll';
 
 import theme from '@/presentation/styles/theme';
-import {
-  Button,
-  Container,
-  ContentInfiniteScroll,
-  Content,
-  ContentHeader,
-  Title,
-  HeaderButton,
-  ContentHeaderButtons,
-} from './styles';
+import { Button } from './Button';
 
 interface ICarrousel extends PropsWithChildren {
   title: string;
@@ -38,7 +22,7 @@ const Carrousel: React.FC<ICarrousel> = ({
   const [currentStep, setCurrentStep] = useState<number>(0);
 
   const handleScroll = (event: 'next' | 'prev') => {
-    if (!infiniteScrollRef && !divRef) return;
+    if (!infiniteScrollRef?.current && !divRef?.current) return;
 
     const nextEvent = event === 'next';
     const elementWidth =
@@ -62,35 +46,38 @@ const Carrousel: React.FC<ICarrousel> = ({
   };
 
   return (
-    <Container>
-      <ContentHeader>
-        <Title>{title}</Title>
+    <div className="flex flex-col w-full relative gap-4 sm:gap-6">
+      <div className="relative flex flex-row items-center justify-between w-full">
+        <h1 className="text-6 font-md sm:text-5">{title}</h1>
 
-        <ContentHeaderButtons>
-          <HeaderButton onClick={() => handleScroll('prev')}>
-            <PrevArrow />
-          </HeaderButton>
+        <div className="flex flex-row gap-2 sm:gap-3">
+          <Button onClick={() => handleScroll('prev')} />
 
-          <HeaderButton onClick={() => handleScroll('next')}>
-            <RightArrow />
-          </HeaderButton>
-        </ContentHeaderButtons>
-      </ContentHeader>
+          <Button
+            onClick={() => handleScroll('next')}
+            direction="right"
+          />
+        </div>
+      </div>
 
-      <Content ref={divRef}>
-        <Button onClick={() => handleScroll('prev')}>
-          <PrevArrow />
-        </Button>
+      <div ref={divRef} className="flex flex-row">
+        <Button onClick={() => handleScroll('prev')} isScrollButton />
 
-        <ContentInfiniteScroll ref={infiniteScrollRef}>
+        <IndianaScroll
+          innerRef={infiniteScrollRef}
+          nativeMobileScroll
+          className="flex items-center gap-4 relative snap-x snap-mandatory w-full overflow-auto"
+        >
           {children}
-        </ContentInfiniteScroll>
+        </IndianaScroll>
 
-        <Button onClick={() => handleScroll('next')}>
-          <RightArrow />
-        </Button>
-      </Content>
-    </Container>
+        <Button
+          onClick={() => handleScroll('next')}
+          direction="right"
+          isScrollButton
+        />
+      </div>
+    </div>
   );
 };
 
