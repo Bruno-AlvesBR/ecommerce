@@ -62,7 +62,7 @@ const Signin: React.FC<ISignin> = ({ onSubmit, form }) => {
         />
       </div>
 
-      <Link href="/autenticacao/registrar">
+      <Link className="text-blue700" href="/autenticacao/registrar">
         Não tem conta? Clique aqui
       </Link>
 

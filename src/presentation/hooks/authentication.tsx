@@ -104,11 +104,10 @@ const AuthenticationProvider: React.FC<IAuthProvider> = ({
           });
         }
 
-        if (isReady && query) {
-          const { redirect } = query;
-          push(redirect.toString());
+        if (isReady && query?.redirect) {
+          push(query.redirect.toString());
         } else {
-          push('/');
+          reload();
         }
       } catch (error) {
         throw new Error(error);
@@ -117,7 +116,7 @@ const AuthenticationProvider: React.FC<IAuthProvider> = ({
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [query, isReady],
+    [query?.redirect, isReady],
   );
 
   const handleLogout = useCallback(() => {

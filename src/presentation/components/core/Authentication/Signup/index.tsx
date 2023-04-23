@@ -103,7 +103,7 @@ const Signup: React.FC<ISignup> = ({ onSubmit, field, form }) => {
         />
       </div>
 
-      <Link href="/autenticacao/logar">
+      <Link className="text-blue700" href="/autenticacao/logar">
         Já tem conta? Clique aqui
       </Link>
 
