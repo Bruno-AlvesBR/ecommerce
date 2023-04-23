@@ -13,10 +13,10 @@ const Button: React.FC<IButton> = ({
 }) => (
   <button
     onClick={onClick}
-    className={`border-0 transition-all ease-in delay-[50] hover:text-red800 outline-blue700 items-center justify-center rounded-2 overflow-hidden hover:brightness-90 bg-white1000 ${
+    className={`px-6 border-0 transition-all ease-in delay-[50] hover:text-red800 outline-blue700 items-center justify-center rounded-2 overflow-hidden hover:brightness-90 bg-white1000 ${
       isScrollButton
-        ? 'flex sm:hidden px-2 h-full'
-        : 'hidden sm:flex py-1 h-fit '
+        ? 'flex flex-1 h-[360px] sm:hidden'
+        : 'hidden h-fit sm:flex py-1'
     }`}
   >
     {direction === 'left' ? (

@@ -60,7 +60,10 @@ const Carrousel: React.FC<ICarrousel> = ({
         </div>
       </div>
 
-      <div ref={divRef} className="flex flex-row">
+      <div
+        ref={divRef}
+        className="relative flex flex-row items-center"
+      >
         <Button onClick={() => handleScroll('prev')} isScrollButton />
 
         <IndianaScroll

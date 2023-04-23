@@ -1,10 +1,8 @@
 import { Banner } from '@/presentation/components/pages/home/Banner';
-import Promotions from '@/presentation/components/pages/home/Promotions';
-import BestSellers from '@/presentation/components/pages/home/Releases';
+import { Promotions } from '@/presentation/components/pages/home/Promotions';
+import { BestSellers } from '@/presentation/components/pages/home/Releases';
 import { MaxContainer } from '@/presentation/components/ui/Container';
 import { IHome } from '@/domain/home/entities';
-
-import { Content } from './styles';
 
 const HomePresentation: React.FC<IHome> = ({
   banners,
@@ -14,14 +12,14 @@ const HomePresentation: React.FC<IHome> = ({
   <MaxContainer>
     {banners?.length > 0 && <Banner banners={banners} />}
 
-    <Content>
+    <div className="relative w-full flex flex-col mt-[12.5rem] bg-white1000 p-4 rounded-2 gap-10 sm:mt-0">
       {releases?.length > 0 && <BestSellers bestSellers={releases} />}
 
       {promotions?.length > 0 && (
         <Promotions promotions={promotions} />
       )}
-    </Content>
+    </div>
   </MaxContainer>
 );
 
-export default HomePresentation;
+export { HomePresentation };

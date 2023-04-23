@@ -1,26 +1,30 @@
 import { PropsWithChildren } from 'react';
 
 import { Carrousel } from '@/presentation/components/core/Carrousel';
-
-import { Container, RedirectButton } from './styles';
+import { Link } from '@/presentation/components/ui/Link';
 
 interface ISection extends PropsWithChildren {
   title: string;
   url: string;
 }
 
-const BestSellers: React.FC<ISection> = ({
+const Section: React.FC<ISection> = ({
   children,
   title,
   url = '/404/',
 }) => (
-  <Container>
+  <div className="relative w-full flex flex-col gap-8 h-fit">
     <Carrousel title={title} itemId="card">
       {children}
     </Carrousel>
 
-    <RedirectButton href={url}>VER TODOS</RedirectButton>
-  </Container>
+    <Link
+      className="hover:text-red800 font-sm text-black1000 underline transition-all ease-in delay-[50] text-center w-fit mx-auto"
+      href={url}
+    >
+      VER TODOS
+    </Link>
+  </div>
 );
 
-export default BestSellers;
+export { Section };

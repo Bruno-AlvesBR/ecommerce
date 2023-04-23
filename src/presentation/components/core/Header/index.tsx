@@ -25,7 +25,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <div className="sm:gap-1 sm:pt-0 lg:px-2 relative pt-1 bg-white1000 border-b-[1px] border-black1000 flex p-0 flex-col gap-2">
+    <div className="sm:gap-1 lg:px-2 relative pt-1 bg-white1000 border-b-[1px] border-black1000 flex p-0 flex-col gap-2">
       <div className="md:gap-4 relative w-full max-w-[1280px] flex items-center justify-between flex-row mx-auto gap-8 h-full">
         <Logo />
         <div className="sm:gap-2 relative w-full flex items-center justify-end gap-4">
