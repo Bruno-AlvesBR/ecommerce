@@ -1,6 +1,6 @@
 interface IMenuList {
-  slug: string;
   title: string;
+  slug: string;
 }
 
 const menuList: Array<IMenuList> = [

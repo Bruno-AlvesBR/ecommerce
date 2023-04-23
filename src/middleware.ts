@@ -5,8 +5,9 @@ import { AUTH_COOKIE } from './utils/constants';
 export function middleware(request: NextRequest) {
   const token = request.cookies.has(AUTH_COOKIE);
   const authPages = request.url.includes('/autenticacao');
+  const profilePage = request.url.includes('/perfil');
 
-  if (!authPages && !token)
+  if (!token && profilePage)
     return NextResponse.redirect(
       new URL(
         `/autenticacao/logar?redirect=${request.url}`,
@@ -22,9 +23,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    '/perfil',
-    '/autenticacao/logar',
-    '/autenticacao/registrar',
-  ],
+  matcher: ['/perfil/:path*', '/autenticacao/:path*'],
 };

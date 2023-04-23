@@ -43,7 +43,7 @@ const Link: React.FC<ILink> = ({
       <a
         style={styles}
         target={target}
-        className={`text-blue700 text-4 hover:underline focus:underline w-fit outline-blue700 ${className}`}
+        className={`text-4 hover:underline focus:underline w-fit outline-blue700 ${className}`}
         {...props}
         onClick={onClick}
         onKeyDown={onClick}

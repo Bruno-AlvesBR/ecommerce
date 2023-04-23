@@ -7,7 +7,7 @@ interface IProfileProps {
 
 const Profile: React.FC<Partial<IProfileProps>> = ({ image }) => (
   <Link
-    href="/perfil?view=inicio"
+    href="/perfil/inicio"
     noDecoration
     className="sm:w-8 sm:max-w-8 sm:h-8 sm:max-h-8 flex items-center justify-center relative p-0 w-10 h-10 max-w-10 max-h-10 rounded-2 bg-red800"
   >
