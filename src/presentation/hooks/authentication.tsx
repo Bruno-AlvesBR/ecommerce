@@ -33,7 +33,7 @@ const AuthContext = createContext({} as IAuthContext);
 const AuthenticationProvider: React.FC<IAuthProvider> = ({
   children,
 }) => {
-  const { push, reload, query, isReady } = useRouter();
+  const { push, reload } = useRouter();
   const authenticationFetchProvider =
     new AuthenticationFetchProvider();
 
@@ -84,6 +84,10 @@ const AuthenticationProvider: React.FC<IAuthProvider> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const params =
+    typeof window !== 'undefined' &&
+    new URLSearchParams(window.location.search);
+
   const handleSignin = useCallback(
     async (data: IUserSignin) => {
       try {
@@ -93,21 +97,18 @@ const AuthenticationProvider: React.FC<IAuthProvider> = ({
           data,
         );
 
-        if (response) {
+        if (response?.id) {
           setUser(response);
 
-          const convertUserId = Buffer.from(response?.id).toString(
+          const convertUserId = Buffer.from(response.id).toString(
             'base64',
           );
           cookies.set(AUTH_COOKIE, convertUserId, {
             maxAge: 60 * 60 * 24,
           });
-        }
 
-        if (isReady && query?.redirect) {
-          push(query.redirect.toString());
-        } else {
-          reload();
+          const redirectParam = params.get('redirect');
+          window.open(redirectParam, '_self');
         }
       } catch (error) {
         throw new Error(error);
@@ -116,7 +117,7 @@ const AuthenticationProvider: React.FC<IAuthProvider> = ({
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [query?.redirect, isReady],
+    [params],
   );
 
   const handleLogout = useCallback(() => {
