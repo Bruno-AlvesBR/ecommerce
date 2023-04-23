@@ -12,7 +12,7 @@ const HomePresentation: React.FC<IHome> = ({
   <MaxContainer>
     {banners?.length > 0 && <Banner banners={banners} />}
 
-    <div className="relative w-full flex flex-col mt-[12.5rem] bg-white1000 p-4 rounded-2 gap-10 sm:mt-0">
+    <div className="relative w-full flex flex-col mt-[12.5rem] bg-white1000 p-4 rounded-2 gap-10 sm:mt-24">
       {releases?.length > 0 && <BestSellers bestSellers={releases} />}
 
       {promotions?.length > 0 && (

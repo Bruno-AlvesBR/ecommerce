@@ -18,6 +18,12 @@ class HomeController {
           alternativeLink: '',
           altText: '',
         },
+        {
+          imageUrl: 'https://iili.io/HGCBAZX.webp',
+          slug: '',
+          alternativeLink: '',
+          altText: '',
+        },
       ];
 
       const releases = await this.releaseProvider.findAllReleases();
