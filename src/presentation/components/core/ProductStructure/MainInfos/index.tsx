@@ -21,37 +21,40 @@ const MainInfos: React.FC<IMainInfos> = ({
   rating,
   installment,
 }) => (
-  <Container>
-    <h1>{title}</h1>
-    <p>
-      <strong>marca:</strong> {brand}
-    </p>
+  <div className="flex flex-col gap-6">
+    <h1 className="text-6 font-md">{title}</h1>
 
-    <p>
-      <strong>avaliações:</strong> {rating}
-    </p>
-
-    <br />
-
-    <p
-      style={{
-        textDecorationLine: newPriceDiscount && 'line-through',
-      }}
-    >
-      {price}
-    </p>
-
-    <span style={{ display: 'flex', gap: 8 }}>
-      <strong>preço:</strong>{' '}
-      {newPriceDiscount && <p> {newPriceDiscount} no PIX</p>}
-    </span>
-
-    {pricePerMonth && (
+    <div className="flex flex-col items-start">
       <p>
-        <strong>parcelas: </strong> x{installment} de {pricePerMonth}
+        <strong>marca:</strong> {brand}
       </p>
-    )}
-  </Container>
+      <p>
+        <strong>avaliações:</strong> {rating}
+      </p>
+    </div>
+
+    <div>
+      <p
+        className={`text-4 ${
+          newPriceDiscount && 'line-through text-red800'
+        }`}
+      >
+        {price}
+      </p>
+
+      <div className="flex flex-row gap-1">
+        <strong>preço:</strong>
+        {newPriceDiscount && <p> {newPriceDiscount} no PIX</p>}
+      </div>
+
+      {pricePerMonth && (
+        <p>
+          <strong>parcelamento:</strong> x{installment} de{' '}
+          {pricePerMonth}
+        </p>
+      )}
+    </div>
+  </div>
 );
 
 export { MainInfos };

@@ -25,9 +25,7 @@ const ImagesStructure: React.FC<IIMageStructure> = ({ images }) => {
         smallImage={{
           src: mainUrl,
           alt: '',
-          isFluidWidth: false,
-          width: 500,
-          height: 500,
+          isFluidWidth: true,
         }}
         largeImage={{
           src: mainUrl,
@@ -41,28 +39,34 @@ const ImagesStructure: React.FC<IIMageStructure> = ({ images }) => {
   );
 
   return (
-    <Container>
-      <ContentMainImage>{treatedImage}</ContentMainImage>
+    <div className="relative flex flex-col items-top w-full max-w-[40vw] sm:max-w-full">
+      <div className="relative w-full h-full aspect-[16/9]">
+        {treatedImage}
+      </div>
 
-      <Carrousel title={undefined} itemId="card-image">
+      <Carrousel itemId="card-image">
         {images?.map((image, index: number) => (
-          <ContentAltImage
+          <div
+            className={`snap-x snap-start transition-all ease-in delay-[50] cursor-pointer hover:brightness-75 bg-white1000 rounded-4 aspect-[16/9] min-w-[100px] min-h-[100px] max-w-[100px] max-h-[100px] relative ${
+              mainUrl === image &&
+              'border-[1px] border-black1000 rounded-2'
+            }`}
             key={index}
-            isSelected={mainUrl === image}
             onClick={() => setMainUrl(image)}
             id="card-image"
           >
             <Image
               key={image}
               src={image}
+              placeholder="blur"
+              blurDataURL={image}
               alt=""
-              width={100}
-              height={100}
+              layout="fill"
             />
-          </ContentAltImage>
+          </div>
         ))}
       </Carrousel>
-    </Container>
+    </div>
   );
 };
 

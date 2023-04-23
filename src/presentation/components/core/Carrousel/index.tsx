@@ -6,13 +6,15 @@ import theme from '@/presentation/styles/theme';
 import { Button } from './Button';
 
 interface ICarrousel extends PropsWithChildren {
-  title: string;
+  title?: string;
+  isShowHeader?: boolean;
   itemId: string;
 }
 
 const Carrousel: React.FC<ICarrousel> = ({
   children,
   title,
+  isShowHeader = false,
   itemId,
 }) => {
   const infiniteScrollRef = useRef<HTMLDivElement>(null);
@@ -48,16 +50,20 @@ const Carrousel: React.FC<ICarrousel> = ({
   return (
     <div className="flex flex-col w-full relative gap-4 sm:gap-6">
       <div className="relative flex flex-row items-center justify-between w-full">
-        <h1 className="text-6 font-md sm:text-5">{title}</h1>
+        {title && (
+          <h1 className="text-6 font-md sm:text-5">{title}</h1>
+        )}
 
-        <div className="flex flex-row gap-2 sm:gap-3">
-          <Button onClick={() => handleScroll('prev')} />
+        {isShowHeader && (
+          <div className="flex flex-row gap-2 sm:gap-3">
+            <Button onClick={() => handleScroll('prev')} />
 
-          <Button
-            onClick={() => handleScroll('next')}
-            direction="right"
-          />
-        </div>
+            <Button
+              onClick={() => handleScroll('next')}
+              direction="right"
+            />
+          </div>
+        )}
       </div>
 
       <div
