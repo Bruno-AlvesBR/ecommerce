@@ -5,19 +5,12 @@ export interface ICartDTO {
   productsId: Array<string>;
 }
 
-export interface IRemoveProductCartDTO {
-  id: string;
-  productsId: Array<string>;
+export interface IFindAllDTO {
+  filters: { ids: string };
 }
 
 abstract class ICartData {
-  abstract addProductToCart(data: ICartDTO): Promise<void>;
-
-  abstract findAll(id: string): Promise<Array<IProductApi>>;
-
-  abstract removeProductIntoCart(
-    data: IRemoveProductCartDTO,
-  ): Promise<void>;
+  abstract findAll(params: IFindAllDTO): Promise<Array<IProductApi>>;
 }
 
 export { ICartData };

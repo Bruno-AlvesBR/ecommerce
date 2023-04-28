@@ -8,15 +8,14 @@ import {
 } from 'react';
 import { useRouter } from 'next/router';
 
-import { useAuth } from './authentication';
 import { CartProvider as FetchCartProvider } from '@/providers/cart';
-import { IProduct } from '@/domain/api/product/entities';
-import { handleFormatProduct } from '@/utils/format/product';
+import { cookies } from '@/utils/cookies';
+import { CART_PRODUCT_IDS } from '@/utils/constants';
+import { ICartCookie } from '@/domain/cart/entities';
 
 export interface ICartContext {
   handleAddProductInCart(productId: string): void;
   handleRemoveProduct(productId: string): void;
-  cartProducts: Array<IProduct>;
   countProducts: number;
   setCountProducts(value: number): void;
 }
@@ -26,64 +25,90 @@ interface ICartProvider extends Partial<PropsWithChildren> {}
 const CartContext = createContext({} as ICartContext);
 
 const CartProvider: React.FC<ICartProvider> = ({ children }) => {
-  const { user } = useAuth();
-  const { push, reload, pathname } = useRouter();
   const cartProvider = new FetchCartProvider();
+  const { push, reload } = useRouter();
 
-  const [cartProducts, setCartProducts] = useState<Array<IProduct>>(
-    [],
-  );
-  const [countProducts, setCountProducts] = useState<number>(
-    cartProducts.length || 0,
-  );
+  const [countProducts, setCountProducts] = useState<number>(0);
 
-  const handleGetAllProductsCart =
-    useCallback(async (): Promise<void> => {
-      const products = await cartProvider.findAll(user.cartId);
-      if (!products || products.length <= 0) return;
+  const handleGetAllProductsCart = useCallback(async () => {
+    const cartProducts: ICartCookie =
+      cookies.get(CART_PRODUCT_IDS) || [];
+    if (cartProducts.length === 0) return;
 
-      setCountProducts(products.length);
+    const idArray = cartProducts.map(product => product.id).join(',');
 
-      const formattedProducts = products.map(product =>
-        handleFormatProduct(product),
-      );
-      setCartProducts(formattedProducts);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user.cartId]);
+    const products = await cartProvider.findAll({
+      filters: { ids: idArray },
+    });
+    if (!products || products.length <= 0) return;
 
-  useMemo(() => {
-    if (!pathname.includes('carrinho')) handleGetAllProductsCart();
+    setCountProducts(products.length);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user.cartId, pathname, handleGetAllProductsCart]);
+  }, []);
+
+  useMemo(
+    () => handleGetAllProductsCart(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [cookies],
+  );
 
   const handleAddProductInCart = useCallback(
     async (productId: string) => {
-      if (user?.id) {
-        await cartProvider.addProductToCart({
-          id: user.cartId,
-          productsId: [productId],
-        });
+      const products = [];
+      const cartProducts: ICartCookie =
+        cookies.get(CART_PRODUCT_IDS) || [];
 
-        push('/carrinho');
+      const hasProductIntoCart = cartProducts.length > 0;
+
+      if (hasProductIntoCart) {
+        const productCartMatch = cartProducts.filter(
+          product => product.id === productId,
+        )[0];
+
+        if (productCartMatch?.id) {
+          const allCartProductsFiltered = cartProducts.filter(
+            product => product.id !== productId,
+          );
+
+          if (allCartProductsFiltered.length > 0)
+            products.push(...allCartProductsFiltered);
+
+          products.push({
+            id: productCartMatch.id,
+            quantity: productCartMatch.quantity + 1,
+          });
+          cookies.set(CART_PRODUCT_IDS, products);
+        } else {
+          products.push(...cartProducts, {
+            id: productId,
+            quantity: 1,
+          });
+          cookies.set(CART_PRODUCT_IDS, products);
+        }
+      } else {
+        products.push({ id: productId, quantity: 1 });
+        cookies.set(CART_PRODUCT_IDS, products);
       }
+
+      push('/carrinho');
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user.cartId, user?.id],
+    [],
   );
 
   const handleRemoveProduct = useCallback(
     async (productId: string) => {
-      if (user?.id) {
-        await cartProvider.removeProductIntoCart({
-          id: user.cartId,
-          productsId: [productId],
-        });
+      const cartProducts: ICartCookie = cookies.get(CART_PRODUCT_IDS);
 
-        reload();
-      }
+      const products = cartProducts.filter(
+        product => product.id !== productId,
+      );
+      cookies.set(CART_PRODUCT_IDS, products);
+
+      reload();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user.cartId, user?.id],
+    [],
   );
 
   return (
@@ -91,7 +116,6 @@ const CartProvider: React.FC<ICartProvider> = ({ children }) => {
       value={{
         handleAddProductInCart,
         handleRemoveProduct,
-        cartProducts,
         countProducts,
         setCountProducts,
       }}

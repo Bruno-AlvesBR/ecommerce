@@ -4,3 +4,8 @@ export type ICartProduct = Pick<
   IProductApi,
   'id' | 'title' | 'images' | 'category' | 'slug' | 'price'
 >;
+
+export type ICartCookie = Array<{
+  id: string;
+  quantity: number;
+}>;

@@ -11,7 +11,7 @@ const Cart: React.FC<ICartProps> = () => {
 
   return (
     <Link href="/carrinho" noDecoration>
-      <Badge count={2}>
+      <Badge count={countProducts}>
         <CartIcon className="w-8 h-8" />
       </Badge>
     </Link>

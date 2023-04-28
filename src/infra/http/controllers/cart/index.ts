@@ -1,22 +1,19 @@
 import { ICartData } from '@/domain/api/cart/data';
-import { IAuthenticationData } from '@/domain/authentication/data';
-import { ICartProduct } from '@/domain/cart/entities';
+import { ICartCookie, ICartProduct } from '@/domain/cart/entities';
 
 class CartController {
   private cartProvider: ICartData;
-  private authProvider: IAuthenticationData;
 
-  constructor(
-    cartProvider: ICartData,
-    authProvider: IAuthenticationData,
-  ) {
+  constructor(cartProvider: ICartData) {
     this.cartProvider = cartProvider;
-    this.authProvider = authProvider;
   }
 
-  async index(id: string) {
-    const user = await this.authProvider.recover(id);
-    const products = await this.cartProvider.findAll(user.cartId);
+  async index(cartProducts: ICartCookie) {
+    const idArray = cartProducts.map(product => product.id).join(',');
+
+    const products = await this.cartProvider.findAll({
+      filters: { ids: idArray },
+    });
 
     const formattedProducts: Array<ICartProduct> = products.map(
       product => ({
