@@ -4,11 +4,11 @@ import {
   useCallback,
   useContext,
   useMemo,
+  useEffect,
   useState,
 } from 'react';
 import { useRouter } from 'next/router';
 
-import { CartProvider as FetchCartProvider } from '@/providers/cart';
 import { cookies } from '@/utils/cookies';
 import { CART_PRODUCT_IDS } from '@/utils/constants';
 import { ICartCookie } from '@/domain/cart/entities';
@@ -25,32 +25,18 @@ interface ICartProvider extends Partial<PropsWithChildren> {}
 const CartContext = createContext({} as ICartContext);
 
 const CartProvider: React.FC<ICartProvider> = ({ children }) => {
-  const cartProvider = new FetchCartProvider();
   const { push, reload } = useRouter();
 
   const [countProducts, setCountProducts] = useState<number>(0);
 
-  const handleGetAllProductsCart = useCallback(async () => {
+  useEffect(() => {
     const cartProducts: ICartCookie =
       cookies.get(CART_PRODUCT_IDS) || [];
+
     if (cartProducts.length === 0) return;
 
-    const idArray = cartProducts.map(product => product.id).join(',');
-
-    const products = await cartProvider.findAll({
-      filters: { ids: idArray },
-    });
-    if (!products || products.length <= 0) return;
-
-    setCountProducts(products.length);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setCountProducts(cartProducts.length);
   }, []);
-
-  useMemo(
-    () => handleGetAllProductsCart(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [cookies],
-  );
 
   const handleAddProductInCart = useCallback(
     async (productId: string) => {
