@@ -10,7 +10,7 @@ import {
 import { useRouter } from 'next/router';
 
 import { cookies } from '@/utils/cookies';
-import { CART_PRODUCT_IDS } from '@/utils/constants';
+import { CART_PRODUCT_IDS, cartMaxAge } from '@/utils/constants';
 import { ICartCookie } from '@/domain/cart/entities';
 
 export interface ICartContext {
@@ -55,17 +55,23 @@ const CartProvider: React.FC<ICartProvider> = ({ children }) => {
             id: productCartMatch.id,
             quantity: productCartMatch.quantity + 1,
           });
-          cookies.set(CART_PRODUCT_IDS, products);
+          cookies.set(CART_PRODUCT_IDS, products, {
+            maxAge: cartMaxAge,
+          });
         } else {
           products.push(...cartProducts, {
             id: productId,
             quantity: 1,
           });
-          cookies.set(CART_PRODUCT_IDS, products);
+          cookies.set(CART_PRODUCT_IDS, products, {
+            maxAge: cartMaxAge,
+          });
         }
       } else {
         products.push({ id: productId, quantity: 1 });
-        cookies.set(CART_PRODUCT_IDS, products);
+        cookies.set(CART_PRODUCT_IDS, products, {
+          maxAge: cartMaxAge,
+        });
       }
 
       push('/carrinho');
@@ -82,7 +88,9 @@ const CartProvider: React.FC<ICartProvider> = ({ children }) => {
       const products = cartProducts.filter(
         product => product.id !== productId,
       );
-      cookies.set(CART_PRODUCT_IDS, products);
+      cookies.set(CART_PRODUCT_IDS, products, {
+        maxAge: cartMaxAge,
+      });
 
       reload();
     },
@@ -106,7 +114,9 @@ const CartProvider: React.FC<ICartProvider> = ({ children }) => {
       id,
       quantity,
     });
-    return cookies.set(CART_PRODUCT_IDS, products);
+    return cookies.set(CART_PRODUCT_IDS, products, {
+      maxAge: cartMaxAge,
+    });
   };
 
   return (
