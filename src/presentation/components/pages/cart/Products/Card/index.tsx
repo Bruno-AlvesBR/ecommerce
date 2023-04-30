@@ -48,7 +48,7 @@ const Card: React.FC<ICard> = ({
 
   return (
     <div
-      className="sm:flex-col flex items-center justify-between gap-2 pb-2 w-full border-b-[1px] border-b-black1000 last-of-type:border-b-0"
+      className="sm:flex-col flex items-center justify-between gap-2 w-full border-b-[1px] border-b-black1000 last-of-type:border-b-0"
       key={id}
     >
       <div className="flex flex-row items-center gap-2">
@@ -72,17 +72,17 @@ const Card: React.FC<ICard> = ({
         </p>
       </div>
 
-      <div className="sm:ml-auto flex flex-row gap-4 items-center">
-        <div className="flex flex-row items-center gap-2">
+      <div className="sm:ml-auto md:gap-2 flex flex-row gap-4 items-center">
+        <div className="sm:order-1 flex flex-row items-center gap-2">
           <button
-            className="hover:text-red800 items-center justify-center font-bold text-4 hover:brightness-90 bg-white1000 p-2 rounded-2 transition-all ease-in delay-[50]"
+            className="sm:p-1 hover:text-red800 items-center justify-center font-bold text-4 hover:brightness-90 bg-white1000 p-2 rounded-2 transition-all ease-in delay-[50]"
             onClick={() => handleUpdateProductQuantity('reduce')}
           >
             -
           </button>
           <p className="font-bold text-4">{productQuantity}</p>
           <button
-            className="hover:text-red800 items-center justify-center font-bold text-4 hover:brightness-90 bg-white1000 p-2 rounded-2 transition-all ease-in delay-[50]"
+            className="sm:p-1 hover:text-red800 items-center justify-center font-bold text-4 hover:brightness-90 bg-white1000 p-2 rounded-2 transition-all ease-in delay-[50]"
             onClick={() => handleUpdateProductQuantity('add')}
           >
             +

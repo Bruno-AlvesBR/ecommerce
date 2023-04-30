@@ -30,15 +30,6 @@ const CartProvider: React.FC<ICartProvider> = ({ children }) => {
 
   const [countProducts, setCountProducts] = useState<number>(0);
 
-  useEffect(() => {
-    const cartProducts: ICartCookie =
-      cookies.get(CART_PRODUCT_IDS) || [];
-
-    if (cartProducts.length === 0) return;
-
-    setCountProducts(cartProducts.length);
-  }, []);
-
   const handleAddProductInCart = useCallback(
     async (productId: string) => {
       const products = [];
