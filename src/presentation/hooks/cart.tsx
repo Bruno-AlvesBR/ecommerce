@@ -16,6 +16,7 @@ import { ICartCookie } from '@/domain/cart/entities';
 export interface ICartContext {
   handleAddProductInCart(productId: string): void;
   handleRemoveProduct(productId: string): void;
+  handleUpdateCartProducts(id: string, quantity: number): void;
   countProducts: number;
   setCountProducts(value: number): void;
 }
@@ -84,7 +85,8 @@ const CartProvider: React.FC<ICartProvider> = ({ children }) => {
 
   const handleRemoveProduct = useCallback(
     async (productId: string) => {
-      const cartProducts: ICartCookie = cookies.get(CART_PRODUCT_IDS);
+      const cartProducts: ICartCookie =
+        cookies.get(CART_PRODUCT_IDS) || [];
 
       const products = cartProducts.filter(
         product => product.id !== productId,
@@ -97,11 +99,31 @@ const CartProvider: React.FC<ICartProvider> = ({ children }) => {
     [],
   );
 
+  const handleUpdateCartProducts = (id: string, quantity: number) => {
+    const cartProducts: ICartCookie =
+      cookies.get(CART_PRODUCT_IDS) || [];
+
+    const products: ICartCookie = [];
+
+    const arrayWithoutSelectedProduct = cartProducts.filter(
+      product => product.id !== id,
+    );
+
+    if (quantity === 1) return handleRemoveProduct(id);
+
+    products.push(...arrayWithoutSelectedProduct, {
+      id,
+      quantity,
+    });
+    return cookies.set(CART_PRODUCT_IDS, products);
+  };
+
   return (
     <CartContext.Provider
       value={{
         handleAddProductInCart,
         handleRemoveProduct,
+        handleUpdateCartProducts,
         countProducts,
         setCountProducts,
       }}

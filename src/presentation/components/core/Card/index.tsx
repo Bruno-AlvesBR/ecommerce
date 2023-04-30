@@ -31,7 +31,7 @@ const DefaultCard: React.FC<IProduct> = props => {
   } = props;
 
   const [mainImage, setMainImage] = useState(
-    images?.length > 0 && images[0],
+    images?.length > 0 ? images[0] : '',
   );
 
   const treatedImage = useMemo(
