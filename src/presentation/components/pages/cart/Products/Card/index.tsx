@@ -48,7 +48,7 @@ const Card: React.FC<ICard> = ({
 
   return (
     <div
-      className="sm:flex-col flex items-center justify-between gap-2 w-full border-b-[1px] border-b-black1000 last-of-type:border-b-0"
+      className="last-of-type:pb-0 pb-2 sm:flex-col flex items-center justify-between gap-2 w-full border-b-[1px] border-b-black1000 last-of-type:border-b-0"
       key={id}
     >
       <div className="flex flex-row items-center gap-2">
@@ -90,7 +90,7 @@ const Card: React.FC<ICard> = ({
         </div>
 
         <button
-          className="flex flex-center justify-center outline-none bg-transparent w-fit h-fit border-none cursor-pointer ml-auto transition-all ease-in delay-[50] hover:text-red800 focus:text-red800 hover:brightness-90 bg-white1000 p-2 rounded-2"
+          className="sm:p-1 flex flex-center justify-center outline-none bg-transparent w-fit h-fit border-none cursor-pointer ml-auto transition-all ease-in delay-[50] hover:text-red800 focus:text-red800 hover:brightness-90 bg-white1000 p-2 rounded-2"
           onClick={() => handleRemoveProduct(id)}
         >
           <DeleteIcon />
