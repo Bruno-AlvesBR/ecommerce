@@ -5,6 +5,7 @@ import type { AppProps } from 'next/app';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 
 import { HeadTitle } from '@/presentation/components/core/HeadTitle';
+import { CookieBanner } from '@/presentation/components/core/CookieBanner';
 import { Header } from '@/presentation/components/core/Header';
 import { AllProviders } from '@/presentation/hooks';
 
@@ -24,6 +25,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
         <Component {...pageProps} />
       </ContainerApp>
     </AllProviders>
+
+    <CookieBanner />
   </ThemeProvider>
 );
 

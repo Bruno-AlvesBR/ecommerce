@@ -104,7 +104,7 @@ const AuthenticationProvider: React.FC<IAuthProvider> = ({
             'base64',
           );
           cookies.set(AUTH_COOKIE, convertUserId, {
-            maxAge: 60 * 60 * 24,
+            maxAge: 3600 * 24 * 7,
           });
 
           const redirectParam = params.get('redirect');
