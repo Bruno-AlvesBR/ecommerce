@@ -1,10 +1,6 @@
 import { CartMenu } from '@/presentation/components/pages/cart/Menu';
 import { CartProducts } from '@/presentation/components/pages/cart/Products';
 import { ICartProduct } from '@/domain/cart/entities';
-import { useCart } from '@/presentation/hooks/cart';
-import { useEffect } from 'react';
-
-import { Container, Content } from './styles';
 
 interface ICartPresentation {
   products: Array<ICartProduct>;
@@ -12,23 +8,14 @@ interface ICartPresentation {
 
 const CartPresentation: React.FC<ICartPresentation> = ({
   products,
-}) => {
-  const { setCountProducts } = useCart();
+}) => (
+  <div className="sm:mx-2 sm:mt-4 flex flex-col m-[40px] w-full">
+    <div className="sm:flex-col flex flex-row w-full gap-4">
+      <CartProducts products={products} />
 
-  useEffect(() => {
-    if (products?.length) setCountProducts(products.length);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [products]);
-
-  return (
-    <Container>
-      <Content>
-        <CartProducts products={products} />
-
-        <CartMenu products={products} />
-      </Content>
-    </Container>
-  );
-};
+      <CartMenu products={products} />
+    </div>
+  </div>
+);
 
 export { CartPresentation };

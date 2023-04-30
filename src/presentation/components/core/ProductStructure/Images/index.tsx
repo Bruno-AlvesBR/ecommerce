@@ -1,23 +1,20 @@
 import Image from 'next/image';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ReactImageMagnify from 'react-image-magnify';
 
 import { Carrousel } from '../../Carrousel';
-
-import {
-  Container,
-  ContentMainImage,
-  ContentAltImage,
-} from './styles';
 
 interface IIMageStructure {
   images: Array<string>;
 }
 
 const ImagesStructure: React.FC<IIMageStructure> = ({ images }) => {
-  const [mainUrl, setMainUrl] = useState(
-    images?.length > 0 && images[0],
-  );
+  const [mainUrl, setMainUrl] = useState('');
+
+  useEffect(() => {
+    if (images?.length > 0) setMainUrl(images[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const treatedImage = useMemo(
     (): JSX.Element => (
@@ -44,10 +41,10 @@ const ImagesStructure: React.FC<IIMageStructure> = ({ images }) => {
         {treatedImage}
       </div>
 
-      <Carrousel itemId="card-image">
+      <Carrousel itemId="card-image" isShowHeader>
         {images?.map((image, index: number) => (
           <div
-            className={`snap-x snap-start transition-all ease-in delay-[50] cursor-pointer hover:brightness-75 bg-white1000 rounded-4 aspect-[16/9] min-w-[100px] min-h-[100px] max-w-[100px] max-h-[100px] relative ${
+            className={`snap-start transition-all ease-in delay-[50] cursor-pointer hover:brightness-75 bg-white1000 rounded-4 aspect-[16/9] min-w-[100px] min-h-[100px] max-w-[100px] max-h-[100px] relative ${
               mainUrl === image &&
               'border-[1px] border-black1000 rounded-2'
             }`}

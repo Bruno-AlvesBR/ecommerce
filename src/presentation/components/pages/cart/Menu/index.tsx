@@ -1,16 +1,15 @@
 import { ICartProduct } from '@/domain/cart/entities';
-import { Container } from './styles';
 
 interface ICartMenu {
   products: Array<ICartProduct>;
 }
 
 const CartMenu: React.FC<ICartMenu> = ({ products }) => (
-  <Container>
+  <div className="shadow-md sm:max-w-full flex flex-col w-full max-w-[300px] bg-white1000 rounded-2 p-4">
     {products?.map(item => (
       <p key={item.id}>{item.price?.priceNumber}</p>
     ))}
-  </Container>
+  </div>
 );
 
 export { CartMenu };

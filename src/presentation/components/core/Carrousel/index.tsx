@@ -48,14 +48,14 @@ const Carrousel: React.FC<ICarrousel> = ({
   };
 
   return (
-    <div className="flex flex-col w-full relative gap-4 sm:gap-6">
+    <div className="flex flex-col w-full relative gap-4 sm:gap-5">
       <div className="relative flex flex-row items-center justify-between w-full">
         {title && (
           <h1 className="text-6 font-md sm:text-5">{title}</h1>
         )}
 
         {isShowHeader && (
-          <div className="flex flex-row gap-2 sm:gap-3">
+          <div className="flex flex-row gap-2 sm:gap-3 ml-auto">
             <Button onClick={() => handleScroll('prev')} />
 
             <Button
@@ -72,13 +72,12 @@ const Carrousel: React.FC<ICarrousel> = ({
       >
         <Button onClick={() => handleScroll('prev')} isScrollButton />
 
-        <IndianaScroll
-          innerRef={infiniteScrollRef}
-          nativeMobileScroll
-          className="flex items-center gap-4 relative snap-x snap-mandatory w-full overflow-auto"
+        <div
+          ref={infiniteScrollRef}
+          className="flex items-center gap-4 relative snap-x snap-mandatory w-full overflow-auto scrollbar-hide"
         >
           {children}
-        </IndianaScroll>
+        </div>
 
         <Button
           onClick={() => handleScroll('next')}

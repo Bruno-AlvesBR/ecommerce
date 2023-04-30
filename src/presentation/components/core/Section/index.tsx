@@ -13,8 +13,8 @@ const Section: React.FC<ISection> = ({
   title,
   url = '/404/',
 }) => (
-  <div className="relative w-full flex flex-col gap-8 h-fit">
-    <Carrousel title={title} itemId="card">
+  <div className="sm:gap-5 relative w-full flex flex-col gap-8 h-fit">
+    <Carrousel title={title} itemId="card" isShowHeader>
       {children}
     </Carrousel>
 
