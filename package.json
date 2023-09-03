@@ -22,7 +22,7 @@
     "dayjs": "^1.11.1",
     "eslint-config-prettier": "^8.5.0",
     "jsonwebtoken": "^8.5.1",
-    "next": "12.3.0",
+    "next": "13",
     "postcss": "8.4.21",
     "react": "18.2.0",
     "react-dom": "18.2.0",

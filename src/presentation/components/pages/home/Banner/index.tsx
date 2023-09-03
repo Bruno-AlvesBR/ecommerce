@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Autoplay } from 'swiper';
+import SwiperCore, { Autoplay, Pagination } from 'swiper';
 
-SwiperCore.use([Autoplay]);
+SwiperCore.use([Autoplay, Pagination]);
 
 import { IBanner } from '@/domain/banner/entities';
 
@@ -12,7 +12,7 @@ interface IHomeBanner {
 }
 
 const HomeBanner: React.FC<IHomeBanner> = ({ banners }) => (
-  <div className="absolute top-0 w-full max-w-[1440px] -z-[1]">
+  <div className="relative w-full h-full aspect-[16/5] sm:aspect-[16/8] overflow-hidden rounded-md sm:rounded-se-none">
     <Swiper
       slidesPerView={1}
       centeredSlides
@@ -22,12 +22,13 @@ const HomeBanner: React.FC<IHomeBanner> = ({ banners }) => (
         stopOnLastSlide: false,
         pauseOnMouseEnter: true,
       }}
+      pagination={{ clickable: true }}
       loop
     >
       {banners?.map(banner => (
         <SwiperSlide
           key={banner?.slug}
-          className="w-full h-full aspect-[16/9]"
+          className="w-full h-full aspect-[16/5] sm:aspect-[16/8]"
         >
           <Image
             src={String(banner.imageUrl)}

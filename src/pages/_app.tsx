@@ -1,5 +1,6 @@
 import '@/presentation/styles/globals.css';
 import 'swiper/css';
+import 'swiper/css/pagination';
 
 import type { AppProps } from 'next/app';
 import { ThemeProvider, CssBaseline } from '@mui/material';

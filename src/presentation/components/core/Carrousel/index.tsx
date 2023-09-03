@@ -51,7 +51,7 @@ const Carrousel: React.FC<ICarrousel> = ({
     <div className="flex flex-col w-full relative gap-4 sm:gap-5">
       <div className="relative flex flex-row items-center justify-between w-full">
         {title && (
-          <h1 className="text-6 font-md sm:text-5">{title}</h1>
+          <h2 className="text-6 font-semibold sm:text-5">{title}</h2>
         )}
 
         {isShowHeader && (

@@ -34,38 +34,24 @@ const DefaultCard: React.FC<IProduct> = props => {
     images?.length > 0 ? images[0] : '',
   );
 
-  const treatedImage = useMemo(
-    (): JSX.Element => (
-      <ReactImageMagnify
-        smallImage={{
-          src: mainImage,
-          alt: '',
-          width: 135,
-          height: 135,
-          isFluidWidth: false,
-        }}
-        largeImage={{
-          src: mainImage,
-          alt: '',
-          width: 500,
-          height: 500,
-        }}
-      />
-    ),
-    [mainImage],
-  );
-
   return props.id ? (
     <div
       id="card"
-      className="border-[0.5px] border-black1000 pt-2 px-8 pb-8 relative flex flex-col justify-between snap-start bg-white1000 rounded-2 min-w-[300px] max-w-[300px] min-h-[360px] max-h-[360px]"
+      className="sm:min-w-[260px] sm:max-w-[260px] sm:px-4 sm:pb-4 border-[0.5px] border-black1000 pt-2 px-8 pb-8 relative flex flex-col justify-between snap-start bg-white1000 rounded-2 min-w-[300px] max-w-[300px] min-h-[360px] max-h-[360px]"
     >
       {discountPercentage && (
         <PromotionFlag discountPercentage={discountPercentage} />
       )}
       <Content>
         {images?.length > 0 && (
-          <ContentImage>{treatedImage}</ContentImage>
+          <Image
+            src={mainImage}
+            alt=""
+            width={135}
+            height={135}
+            blurDataURL={images[0]}
+            placeholder="blur"
+          />
         )}
 
         <Link

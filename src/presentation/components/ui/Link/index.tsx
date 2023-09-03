@@ -3,6 +3,7 @@ import {
   AnchorHTMLAttributes,
   DetailedHTMLProps,
   PropsWithChildren,
+  Ref,
   useMemo,
 } from 'react';
 
@@ -15,6 +16,7 @@ export interface ILink
   noDecoration?: boolean;
   disabled?: boolean;
   onClick?: () => void;
+  ref?: Ref<HTMLAnchorElement>;
 }
 
 const Link: React.FC<ILink> = ({
@@ -39,18 +41,18 @@ const Link: React.FC<ILink> = ({
   }, [noDecoration, disabled]);
 
   return (
-    <NextLink href={href} passHref>
-      <a
-        style={styles}
-        target={target}
-        className={`text-4 hover:underline focus:underline w-fit outline-blue700 ${className}`}
-        {...props}
-        onClick={onClick}
-        onKeyDown={onClick}
-        aria-hidden="true"
-      >
-        {children}
-      </a>
+    <NextLink
+      href={href}
+      passHref
+      style={styles}
+      target={target}
+      className={`text-4 hover:underline focus:underline w-fit outline-blue700 ${className}`}
+      {...props}
+      onClick={onClick}
+      onKeyDown={onClick}
+      aria-hidden="true"
+    >
+      {children}
     </NextLink>
   );
 };
