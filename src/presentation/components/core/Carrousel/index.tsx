@@ -70,20 +70,12 @@ const Carrousel: React.FC<ICarrousel> = ({
         ref={divRef}
         className="relative flex flex-row items-center"
       >
-        <Button onClick={() => handleScroll('prev')} isScrollButton />
-
         <div
           ref={infiniteScrollRef}
-          className="flex items-center gap-4 relative snap-x snap-mandatory w-full overflow-auto scrollbar-hide"
+          className="justify-between flex items-center gap-4 relative snap-x snap-mandatory w-full overflow-auto scrollbar-hide"
         >
           {children}
         </div>
-
-        <Button
-          onClick={() => handleScroll('next')}
-          direction="right"
-          isScrollButton
-        />
       </div>
     </div>
   );

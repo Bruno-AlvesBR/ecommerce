@@ -4,16 +4,18 @@ import { HomePresentation } from '@/presentation/pages/home';
 import { HomeController } from '@/infra/http/controllers/home';
 import { IHome } from '@/domain/home/entities';
 import { ProductProvider } from '@/providers/product';
+import { CategoryProvider } from '@/providers/category';
 
 const Home: NextPage<IHome> = props => (
   <HomePresentation {...props} />
 );
 
-export default Home;
-
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const homeController = new HomeController(new ProductProvider());
+    const homeController = new HomeController(
+      new ProductProvider(),
+      new CategoryProvider(),
+    );
     const props = await homeController.index();
 
     return {
@@ -31,3 +33,5 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   }
 };
+
+export default Home;

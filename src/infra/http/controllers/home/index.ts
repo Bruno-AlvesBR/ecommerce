@@ -1,12 +1,18 @@
 import { IProductData } from '@/domain/api/product/data';
 import { IBanner } from '@/domain/banner/entities';
+import { ICategoryData } from '@/domain/category/data';
 import { handleFormatProduct } from '@/utils/format/product';
 
 class HomeController {
   private releaseProvider: IProductData;
+  private categoryProvider: ICategoryData;
 
-  constructor(releaseProvider: IProductData) {
+  constructor(
+    releaseProvider: IProductData,
+    categoryProvider: ICategoryData,
+  ) {
     this.releaseProvider = releaseProvider;
+    this.categoryProvider = categoryProvider;
   }
 
   async index() {
@@ -26,9 +32,11 @@ class HomeController {
         },
       ];
 
-      const releases = await this.releaseProvider.findAllReleases();
-      const promotions =
-        await this.releaseProvider.findAllPromotions();
+      const [releases, promotions, categories] = await Promise.all([
+        this.releaseProvider.findAllReleases(),
+        this.releaseProvider.findAllPromotions(),
+        this.categoryProvider.findAll(),
+      ]);
 
       const formattedReleases = releases?.map(release =>
         handleFormatProduct(release),
@@ -42,6 +50,7 @@ class HomeController {
         banners,
         releases: formattedReleases,
         promotions: formattedPromotions,
+        categories,
       };
     } catch (error) {
       console.error('error requesting/formatting data', error);
@@ -50,6 +59,7 @@ class HomeController {
         banners: [],
         releases: [],
         promotions: [],
+        categories: [],
       };
     }
   }

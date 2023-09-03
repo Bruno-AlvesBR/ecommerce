@@ -21,6 +21,7 @@
     "axios": "^0.27.2",
     "dayjs": "^1.11.1",
     "eslint-config-prettier": "^8.5.0",
+    "framer-motion": "^10.16.2",
     "jsonwebtoken": "^8.5.1",
     "next": "13",
     "postcss": "8.4.21",
