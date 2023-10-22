@@ -21,17 +21,6 @@ export const Container = styled('form')<IContainer>(
     border: `1px solid ${theme?.palette?.common?.black}`,
     borderRadius: 6,
     transition: '.3s all ease',
-
-    [theme?.breakpoints?.down('sm')]: {
-      padding: '0 0.5rem 1rem 0.5rem',
-      maxWidth: '100%',
-      alignItems: 'inherit',
-
-      ...(!expandedFilter && {
-        justifyContent: 'center',
-        padding: '0 0.5rem',
-      }),
-    },
   }),
 );
 
@@ -64,11 +53,6 @@ export const ContentHeader = styled(Box)<IContainer>(
     [theme?.breakpoints?.down('sm')]: {
       borderBottom: 'none',
       padding: 0,
-
-      ...(expandedFilter && {
-        padding: '1rem 0',
-        borderBottom: `1px solid ${theme?.palette?.common?.black}`,
-      }),
     },
   }),
 );

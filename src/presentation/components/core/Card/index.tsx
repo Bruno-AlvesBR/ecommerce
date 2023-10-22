@@ -1,6 +1,5 @@
-import { memo, useMemo, useState } from 'react';
+import { memo, useState } from 'react';
 import Image from 'next/image';
-import ReactImageMagnify from 'react-image-magnify';
 
 import { Link } from '@/presentation/components/ui/Link';
 import { IProduct } from '@/domain/api/product/entities';
@@ -12,29 +11,29 @@ import {
   ContentPrice,
   Price,
   Content,
-  ContentImage,
   ContentAlternativeImages,
   AltImage,
 } from './styles';
 
-const DefaultCard: React.FC<IProduct> = props => {
-  const {
-    category,
-    title,
-    slug,
-    price,
-    images,
-    installment,
-    newPriceDiscount,
-    pricePerMonth,
-    discountPercentage,
-  } = props;
-
+const DefaultCard: React.FC<IProduct> = ({
+  id,
+  category,
+  title,
+  slug,
+  price,
+  images,
+  installment,
+  newPriceDiscount,
+  pricePerMonth,
+  discountPercentage,
+}) => {
   const [mainImage, setMainImage] = useState(
     images?.length > 0 ? images[0] : '',
   );
 
-  return props.id ? (
+  if (!id) return <CardSkeleton />;
+
+  return (
     <div
       id="card"
       className="sm:min-w-[260px] sm:max-w-[260px] sm:px-4 sm:pb-4 border-[0.5px] border-black1000 pt-2 px-8 pb-8 relative flex flex-col justify-between snap-start bg-white1000 rounded-2 min-w-[300px] max-w-[300px] min-h-[360px] max-h-[360px]"
@@ -97,14 +96,14 @@ const DefaultCard: React.FC<IProduct> = props => {
                 alt=""
                 height={60}
                 width={60}
+                blurDataURL={image}
+                placeholder="blur"
               />
             </AltImage>
           ))}
         </ContentAlternativeImages>
       )}
     </div>
-  ) : (
-    <CardSkeleton />
   );
 };
 

@@ -12,7 +12,7 @@ interface IHomeBanner {
 }
 
 const HomeBanner: React.FC<IHomeBanner> = ({ banners }) => (
-  <div className="relative w-full h-full aspect-[16/5] sm:aspect-[16/8] overflow-hidden rounded-md sm:rounded-se-none">
+  <div className="relative w-full h-full aspect-[16/5] sm:aspect-[16/8] overflow-hidden rounded-md sm:rounded-t-none">
     <Swiper
       slidesPerView={1}
       centeredSlides

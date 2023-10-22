@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import { useEffect, useMemo, useState } from 'react';
-import ReactImageMagnify from 'react-image-magnify';
+import { useState } from 'react';
 
 import { Carrousel } from '../../Carrousel';
 
@@ -9,36 +8,20 @@ interface IIMageStructure {
 }
 
 const ImagesStructure: React.FC<IIMageStructure> = ({ images }) => {
-  const [mainUrl, setMainUrl] = useState('');
-
-  useEffect(() => {
-    if (images?.length > 0) setMainUrl(images[0]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const treatedImage = useMemo(
-    (): JSX.Element => (
-      <ReactImageMagnify
-        smallImage={{
-          src: mainUrl,
-          alt: '',
-          isFluidWidth: true,
-        }}
-        largeImage={{
-          src: mainUrl,
-          alt: '',
-          width: 1000,
-          height: 1000,
-        }}
-      />
-    ),
-    [mainUrl],
-  );
+  const [mainUrl, setMainUrl] = useState(images[0]);
 
   return (
     <div className="relative flex flex-col items-top w-full max-w-[40vw] sm:max-w-full">
-      <div className="relative w-full h-full aspect-[16/9]">
-        {treatedImage}
+      <div className="sm:min-h-[300px] relative w-full min-h-[500px] aspect-[16/9]">
+        <Image
+          src={mainUrl}
+          alt=""
+          layout="fill"
+          objectFit="cover"
+          blurDataURL={mainUrl}
+          priority
+          placeholder="blur"
+        />
       </div>
 
       <Carrousel itemId="card-image" isShowHeader>
@@ -57,6 +40,7 @@ const ImagesStructure: React.FC<IIMageStructure> = ({ images }) => {
               src={image}
               placeholder="blur"
               blurDataURL={image}
+              priority
               alt=""
               layout="fill"
             />

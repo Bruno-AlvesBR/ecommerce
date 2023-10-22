@@ -9,6 +9,7 @@ interface ICarrousel extends PropsWithChildren {
   title?: string;
   isShowHeader?: boolean;
   itemId: string;
+  fullWidth?: boolean;
 }
 
 const Carrousel: React.FC<ICarrousel> = ({
@@ -16,6 +17,7 @@ const Carrousel: React.FC<ICarrousel> = ({
   title,
   isShowHeader = false,
   itemId,
+  fullWidth = false,
 }) => {
   const infiniteScrollRef = useRef<HTMLDivElement>(null);
   const divRef = useRef<HTMLDivElement>(null);
@@ -72,7 +74,7 @@ const Carrousel: React.FC<ICarrousel> = ({
       >
         <div
           ref={infiniteScrollRef}
-          className="justify-between flex items-center gap-4 relative snap-x snap-mandatory w-full overflow-auto scrollbar-hide"
+          className="justify-between flex items-center gap-4 relative snap-x snap-mandatory overflow-auto scrollbar-hide"
         >
           {children}
         </div>

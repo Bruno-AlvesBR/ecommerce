@@ -29,10 +29,14 @@ const Filter: React.FC = () => {
     isMobile && setExpandFilter(!expandFilter);
 
   return (
-    <Container expandedFilter={expandFilter}>
+    <Container
+      className="sm:w-full sm:py-2 sm:max-w-full flex items-center justify-center"
+      expandedFilter={expandFilter}
+    >
       <ContentHeader
         expandedFilter={expandFilter}
         onClick={handleToggleFilterShow}
+        className="flex my-auto"
       >
         <Title variant="h2">Filtros</Title>
         <ContentIcon>

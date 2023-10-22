@@ -22,7 +22,9 @@ const MainInfos: React.FC<IMainInfos> = ({
   installment,
 }) => (
   <div className="flex flex-col gap-6">
-    <h1 className="text-6 font-md">{title}</h1>
+    <h1 className="sm:text-5 sm:font-semibold text-6 font-semibold">
+      {title}
+    </h1>
 
     <div className="flex flex-col items-start">
       <p>

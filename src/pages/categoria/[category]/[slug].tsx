@@ -13,8 +13,6 @@ const CategorySlugPage: NextPage<ICategorySlug> = props => (
   <CategorySlugPresentation {...props} />
 );
 
-export default CategorySlugPage;
-
 export const getStaticPaths: GetStaticPaths = () => ({
   fallback: 'blocking',
   paths: [],
@@ -31,14 +29,10 @@ export const getStaticProps: GetStaticProps = async context => {
       String(slug),
     );
 
-    return {
-      props,
-      revalidate: 600,
-    };
+    return { props, revalidate: 600 };
   } catch {
-    return {
-      props: {},
-      revalidate: 60,
-    };
+    return { props: {}, revalidate: 60 };
   }
 };
+
+export default CategorySlugPage;

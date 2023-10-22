@@ -10,7 +10,7 @@ interface ISection extends PropsWithChildren {
 
 const Section: React.FC<ISection> = ({ children, title, url }) => (
   <div className="sm:gap-5 sm:px-2 relative w-full flex flex-col gap-8 h-fit">
-    <Carrousel title={title} itemId="card" isShowHeader>
+    <Carrousel title={title} itemId="card" isShowHeader fullWidth>
       {children}
     </Carrousel>
 
