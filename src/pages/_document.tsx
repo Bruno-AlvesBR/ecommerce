@@ -4,6 +4,7 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document';
+import { Analytics } from '@vercel/analytics/react';
 
 import { getCssText } from '../presentation/styles';
 
@@ -42,6 +43,7 @@ export default class MyDocument extends Document<DocumentProps> {
         <body>
           <Main />
           <NextScript />
+          <Analytics />
         </body>
       </Html>
     );
